@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function Inicio() {
   return (
     <div className="mt-4 p-5 rounded" style={{ backgroundColor: "lightgray" }}>
@@ -10,10 +11,10 @@ function Inicio() {
       <p>
         Frontend: Single Page Application, HTML, CSS, Bootstrap, Javascript, NodeJs y React.
       </p>
-      <button className="btn btn-lg btn-primary">
-        <i className="fa fa-search"> </i>
-        Ver Contenidos
-      </button>
+      <Link to="/documentales" className="btn btn-lg btn-primary">
+          <i className="fa fa-search"> </i>  Ver Contenidos
+      </Link>
+
     </div>
   );
 }

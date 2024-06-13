@@ -1,31 +1,29 @@
-import {Inicio} from "./components/Inicio";
 import "./App.css";
-import {Documentales} from './components/Documentales';
-
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import {Inicio} from "./components/Inicio";
+import {Documentales} from "./components/Documentales";
+import {Menu} from "./components/Menu";
+import { Footer } from "./components/Footer";
 function App() {
-    return (
-      <>
+  return (
+    <>
+      <BrowserRouter>
+        <Menu />
         <div className="divBody">
-            <Documentales/>
+            <Routes>
+              <Route path="/inicio" element={<Inicio />} />
+              <Route path="/documentales" element={<Documentales />} />
+              <Route path="*" element={<Navigate to="/Inicio" replace />} />
+            </Routes>
         </div>
-      </>
-    );
-  }
-  export default App;
+        <Footer />
+      </BrowserRouter>
+    </>
+  );
+}
+export default App;
 
 
 
 
-
-
-
-
-//function App() {
-//return (
-  //  <>
-    //    <Inicio/>
-   // </>
-//);
-//}
-//export default App;
 

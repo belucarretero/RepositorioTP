@@ -1,10 +1,16 @@
-import arrayDocumentales from '../datos-mock/documentales-mock';
-
-
+import React, {useState, useEffect} from 'react';
+import { documentalesMockService } from '../services/documentales-mock.service';
 function Documentales() {
-  const documentales = arrayDocumentales;
   const tituloPagina = 'Documentales';
-
+  const [documentales, setDocumentales] = useState(null);
+  // cargar al montar el componente (solo una vez)
+  useEffect(() => {
+    BuscarArticulosFamilas();
+  }, []);
+  async function BuscarArticulosFamilas() {
+    let data = await documentalesMockService.Buscar();
+    setDocumentales(data);
+  };
   return (
     <div>
       <div className="tituloPagina">{tituloPagina}</div>
@@ -31,4 +37,4 @@ function Documentales() {
 }
 
 
-export { Documentales };
+export {Documentales};
