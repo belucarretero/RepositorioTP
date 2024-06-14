@@ -25,7 +25,6 @@ router.get('/api/productora', async function (req, res, next) {
   const { count, rows } = await db.productora.findAndCountAll({
     attributes: [
       'CodigoProd',
-      'Codigo',
       'Nombre',
       'Fecha_nacimiento',
       'Activo',

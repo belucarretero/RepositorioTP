@@ -85,8 +85,8 @@ async function CrearBaseSiNoExiste() {
     (1623, 'Magali', '1973-05-24', 1, 66666),
     (1723, 'Cristina', '2000-05-30', 1, 77777),
     (1823, 'Rufino', '1952-02-01', 1, 88888),
-    (1923, 'Anabela', '1973-05-22', 99999),
-    (1233, 'Vanesa', '1993-11-19', 12345);`
+    (1923, 'Anabela', '1973-05-22', 0, 99999),
+    (1233, 'Vanesa', '1993-11-19', 1, 12345);`
   );
 
   // Crear tabla series si no existe
