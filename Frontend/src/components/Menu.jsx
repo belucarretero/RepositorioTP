@@ -30,6 +30,12 @@ function Menu() {
               Documentales
             </NavLink>
           </li>
+          <li className="nav-item">	
+            <NavLink className="nav-link" to="/productora">
+              Productora
+            </NavLink>
+          </li>
+
         </ul>
       </div>
     </nav>

@@ -4,6 +4,7 @@ import {Inicio} from "./components/Inicio";
 import {Documentales} from "./components/Documentales";
 import {Menu} from "./components/Menu";
 import { Footer } from "./components/Footer";
+import { Productora } from "./components/productora/Productora";
 function App() {
   return (
     <>
@@ -14,6 +15,8 @@ function App() {
               <Route path="/inicio" element={<Inicio />} />
               <Route path="/documentales" element={<Documentales />} />
               <Route path="*" element={<Navigate to="/Inicio" replace />} />
+              <Route path="/produtora" element={<Productora/>} />
+
             </Routes>
         </div>
         <Footer />
