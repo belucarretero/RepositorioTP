@@ -109,7 +109,7 @@ async function CrearBaseSiNoExiste() {
     await db.run(
       `insert into series values
         (10000, 1000, 'One Tree Hill', '2003-09-23', 1),
-        (20000, 2000, 'Gilmore Girls', '2000-10-05', 1),
+        (20000, 2000, 'Gilmore Girls', '2000-10-05', 0),
         (30000, 3000, 'Gossip Girl', '2007-09-19', 1),
         (40000, 4000, 'Friends', '1994-09-22', 1),
         (50000, 5000, 'Modern Family', '2009-09-23', 1),

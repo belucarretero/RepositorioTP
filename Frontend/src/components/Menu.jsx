@@ -35,6 +35,16 @@ function Menu() {
               Productora
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/capitulos">
+              Capitulos
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/series">
+              Series
+            </NavLink>
+          </li>
 
         </ul>
       </div>
