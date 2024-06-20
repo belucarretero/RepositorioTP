@@ -3,7 +3,8 @@ import moment from "moment";
 import ProductoraBuscar from "./ProductoraBuscar";
 import ProductoraListado from "./ProductoraListado";
 import ProductoraRegistro from "./ProductoraRegistro";
-import { documentalesMockService as documentalesService } from "../../services/documentales-mock.service";
+//import { documentalesMockService as documentalesService } from "../../services////documentales-mock.service";
+import { documentalesService } from "../../services/documentales.service";
 
 function Productora() {
   const TituloAccionABMC = {
@@ -35,45 +36,47 @@ function Productora() {
     BuscarDocumentales();
   }, []);
 
-async function Buscar() {
-    setAccionABMC("L");
-    // harcodeamos 2 articulos para probar
-    setItems([
-      {
-        CodigoProd: 1123,
-        Nombre: "Rodrigo",
-        Codigo: 11111,
-        Fecha_nacimiento: "1973-05-24",
-        Activo: true,
-      },
-      {
-        CodigoProd: 1923,
-        Nombre: "Anabela",
-        Codigo: 99999,
-        Fecha_nacimiento: "1973-05-22",
-        Activo: false,
-      },
-    ]);
-    alert("Buscando...");
+  async function Buscar(_pagina) {
+    if (_pagina && _pagina !== Pagina) {
+      setPagina(_pagina);
+    }
+    // OJO Pagina (y cualquier estado...) se actualiza para el proximo render, para buscar usamos el parametro _pagina
+    else {
+      _pagina = Pagina;
+    }
+    modalDialogService.BloquearPantalla(true);
+    const data = await documentalesService.Buscar(Nombre, Activo, _pagina);
+    modalDialogService.BloquearPantalla(false);
+
+    setItems(data.Items);
+    setRegistrosTotal(data.RegistrosTotal);
+
+
+    //generar array de las paginas para mostrar en select del paginador
+    const arrPaginas = [];
+    for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
+      arrPaginas.push(i);
+    }
+    setPaginas(arrPaginas);
+
   }
 
-  async function BuscarPorId(item, accionABMC) {
-    setAccionABMC(accionABMC);
-    setItem(item);
-    if (accionABMC === "C") {
-      alert("Consultando...");
-    }
-    if (accionABMC === "M") {
-      alert("Modificando...");
-    }
-  }
+
+
+  
+async function BuscarPorId(item, accionABMC) {
+  const data = await productoraService.BuscarPorId(item);
+  setItem(data);
+  setAccionABMC(accionABMC);
+}
+
 
   function Consultar(item) {
     BuscarPorId(item, "C"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
   }
   function Modificar(item) {
     if (!item.Activo) {
-      alert("No puede modificarse un registro Inactivo.");
+      modalDialogService.Alert("No puede modificarse un registro Inactivo.");
       return;
     }
     BuscarPorId(item, "M"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
@@ -84,7 +87,7 @@ async function Buscar() {
     setItem({
         CodigoProd: 1234,
         Nombre: '',
-        Codigo: 23415,
+        Codigo: '',
         Fecha_nacimiento: moment(new Date()).format("YYYY-MM-DD"),
         Activo: true,
       });
@@ -98,25 +101,45 @@ async function Buscar() {
   }
 
   async function ActivarDesactivar(item) {
-    const resp = window.confirm(
-      "Está seguro que quiere " +
+    modalDialogService.Confirm(
+      "Esta seguro que quiere " +
         (item.Activo ? "desactivar" : "activar") +
-        " el registro?"
+        " el registro?",
+      undefined,
+      undefined,
+      undefined,
+      async () => {
+        await articulosService.ActivarDesactivar(item);
+        await Buscar();
+      }
     );
-    if (resp) {
-      alert("Activando/Desactivando...");
-    }
+
   }
+  
 
   async function Grabar(item) {
-    alert(
-      "Registro " +
-        (AccionABMC === "A" ? "agregado" : "modificado") +
-        " correctamente."
-    );
-
+    // agregar o modificar
+    try
+    {
+      await productoraService.Grabar(item);
+    }
+    catch (error)
+    {
+      alert(error?.response?.data?.message ?? error.toString())
+      return; //validaciones por si ingresan mal un dato
+    }
+    await Buscar();
     Volver();
+  
+    setTimeout(() => {
+      alert(
+        "Registro " +
+          (AccionABMC === "A" ? "agregado" : "modificado") +
+          " correctamente."
+      );
+    }, 0);
   }
+  
 
   // Volver/Cancelar desde Agregar/Modificar/Consultar
   function Volver() {

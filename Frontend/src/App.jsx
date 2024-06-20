@@ -1,4 +1,6 @@
 import "./App.css";
+import { ModalDialog } from "./components/ModalDialog";
+//import modalDialogService from "../../services/modalDialog.service";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import {Inicio} from "./components/Inicio";
 import {Documentales} from "./components/Documentales";
@@ -11,6 +13,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <ModalDialog/>
         <Menu />
         <div className="divBody">
             <Routes>
