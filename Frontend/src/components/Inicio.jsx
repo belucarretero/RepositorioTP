@@ -14,6 +14,9 @@ function Inicio() {
       <Link to="/documentales" className="btn btn-lg btn-primary">
           <i className="fa fa-search"> </i>  Ver Contenidos
       </Link>
+      <Link to="/actores" className="btn btn-lg btn-primary">
+          <i className="fa fa-search"> </i>  Ver Actores
+    </Link>
 
     </div>
   );

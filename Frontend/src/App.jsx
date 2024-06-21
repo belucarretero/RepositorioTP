@@ -9,6 +9,8 @@ import {Menu} from "./components/Menu";
 import { Footer } from "./components/Footer";
 import { Productora } from "./components/productora/Productora";
 import { Series } from "./components/series/Series";
+import { Actores } from "./components/Actores";
+import { Peliculas } from "./components/peliculas/Peliculas";
 function App() {
   return (
     <>
@@ -23,6 +25,8 @@ function App() {
               <Route path="*" element={<Navigate to="/Inicio" replace />} />
               <Route path="/productora" element={<Productora/>} />
               <Route path="/series" element={<Series/>} />
+              <Route path="/actores" element={<Actores />} />
+            <Route path="/peliculas" element={<Peliculas />} />
             </Routes>
         </div>
         <Footer />
