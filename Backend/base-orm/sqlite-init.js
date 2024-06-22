@@ -99,7 +99,7 @@ async function CrearBaseSiNoExiste() {
         CodigoSerie INTEGER PRIMARY KEY AUTOINCREMENT,
         ,CodigoCapitulo integer,
         ,Nombre text NOT NULL UNIQUE,
-        ,FechaEstreno text
+        ,FechaEstreno text,
         ,Activo boolean,
         FOREIGN KEY (CodigoCapitulo) REFERENCES capitulos(CodigoCapitulo)
       );`
