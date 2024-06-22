@@ -192,7 +192,7 @@ async function CrearBaseSiNoExiste() {
       (98764,'Jurassic Park',54324,'2017-01-01', 1 ),
       (98763,'Los juegos del hambre',54323,'2017-02-03', 1 ),
       (98762,'El diario de una princesa',54322,'2017-01-18', 1 ),
-      (98761,'Los ilusionistas',54321,'2016-12-25', 1 )
+      (98761,'Los ilusionistas',54321,'2016-12-25', 1 ),
       (98760,'Misterio a Bordo',54320,'2016-12-25', 1 )
       ;`
     );
