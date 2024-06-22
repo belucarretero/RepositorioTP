@@ -37,7 +37,7 @@ async function Grabar(item) {
 }
 
 
-export const articulosService = {
+export const productoraService = {
   Buscar,BuscarPorId,ActivarDesactivar,Grabar
 };
 
