@@ -12,7 +12,7 @@ function Inicio() {
         Frontend: Single Page Application, HTML, CSS, Bootstrap, Javascript, NodeJs y React.
       </p>
       <Link to="/documentales" className="btn btn-lg btn-primary">
-          <i className="fa fa-search"> </i>  Ver Contenidos
+          <i className="fa fa-search"> </i>  Ver Documentales
       </Link>
       <Link to="/actores" className="btn btn-lg btn-primary">
           <i className="fa fa-search"> </i>  Ver Actores
