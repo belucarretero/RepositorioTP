@@ -42,7 +42,7 @@ app.use(peliculasRouter);
 
 ////////////////////////////////////////////////////////////////////////
 
-const actoresMockRouter = require('./routes/actoresMock');
+const actoresMockRouter = require('./routes/actoresmock');
 app.use(actoresMockRouter);
 
 const actoresRouter = require('./routes/actores');
