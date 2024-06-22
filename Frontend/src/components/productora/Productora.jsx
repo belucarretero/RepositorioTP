@@ -5,6 +5,7 @@ import ProductoraListado from "./ProductoraListado";
 import ProductoraRegistro from "./ProductoraRegistro";
 //import { documentalesMockService as documentalesService } from "../../services////documentales-mock.service";
 import { documentalesService } from "../../services/documentales.service";
+import modalDialogService from "../../services/modalDialog.service";
 
 function Productora() {
   const TituloAccionABMC = {
