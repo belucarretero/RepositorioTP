@@ -37,7 +37,6 @@ async function CrearBaseSiNoExiste() {
       `CREATE table documentales( 
               Codigo INTEGER PRIMARY KEY AUTOINCREMENT
             , Nombre text NOT NULL UNIQUE
-            , Fecha_lanzamiento text,
             );`
     );
 
@@ -45,16 +44,16 @@ async function CrearBaseSiNoExiste() {
     console.log("tabla documentales creada!");
     await db.run(
       `insert into documentales values
-        (11111, 'Animales salvajes', '2021-02-18'),
-        (22222, 'Animales pasivos', '2021-06-23'),
-        (33333, 'La primera guerra mundial', '2021-02-22'),
-        (44444, 'La vida de Hitler', '2019-05-24'),
-        (55555, 'El 2001 de Argentina', '2022-02-22'),
-        (66666, 'Historia Argentina', '2020-12-30'),
-        (77777, 'Etapa de industrializacion', '2023-09-01'),
-        (88888, 'El frio de la Antartida', '1997-08-25'),
-        (99999, 'La vida de Rodrigo Bueno El Potro', '2011-02-18'),
-        (12345, 'La historia del Cuarteto', '2020-06-19');`
+        (11111, 'Animales salvajes'),
+        (22222, 'Animales pasivos'),
+        (33333, 'La primera guerra mundial'),
+        (44444, 'La vida de Hitler'),
+        (55555, 'El 2001 de Argentina'),
+        (66666, 'Historia Argentina'),
+        (77777, 'Etapa de industrializacion'),
+        (88888, 'El frio de la Antartida'),
+        (99999, 'La vida de Rodrigo Bueno El Potro'),
+        (12345, 'La historia del Cuarteto');`
          
     );
  }
@@ -189,7 +188,7 @@ async function CrearBaseSiNoExiste() {
       (98768,'El padrino',54328,'2017-01-31', 1 ),
       (98767,'Star Wars: Episode IV - A New Hope',54327,'2017-01-12', 1 ),
       (98766,'The Lord of the Rings: The Return of the King',54326,'2017-01-30', 1 ),
-      (98765,'Avatar',54325,,'2016-12-28', 1 ),
+      (98765,'Avatar',54325,'2016-12-28', 1 ),
       (98764,'Jurassic Park',54324,'2017-01-01', 1 ),
       (98763,'Los juegos del hambre',54323,'2017-02-03', 1 ),
       (98762,'El diario de una princesa',54322,'2017-01-18', 1 ),
