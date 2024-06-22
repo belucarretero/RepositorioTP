@@ -18,7 +18,7 @@ function ProductoraJWT() {
   async function BuscarProductoraJWT() {
      try {
       let data = await productoraJWTService.Buscar();
-      setProductora(data);
+      setproductora(data);
     } catch (error) {
       console.log("error al buscar datos en el servidor!")
     }
