@@ -5,7 +5,7 @@ const db = require("../base-orm/sequelize-init");
 
 router.get("/api/documentales", async function (req, res, next) {
   let data = await db.documentales.findAll({
-    attributes: ["Codigo", "CodigoProd", "Nombre", "Fecha_lanzamiento"],
+    attributes: ["Codigo", "Nombre"],
   });
   res.json(data);
 });

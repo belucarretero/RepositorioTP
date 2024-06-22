@@ -31,16 +31,6 @@ const documentales = sequelize.define(
         msg: "este Nombre ya existe en la tabla!",
       },
     },
-    Fecha_lanzamiento: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          args: true,
-          msg: "Fecha de lanzamiento es requerido",
-        }
-      }
-    },
   }
 );
 const productora = sequelize.define(
