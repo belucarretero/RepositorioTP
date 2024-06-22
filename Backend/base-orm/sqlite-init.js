@@ -96,10 +96,10 @@ async function CrearBaseSiNoExiste() {
   if (!existe) {
     await db.run(
       `CREATE table series(
-        CodigoSerie INTEGER PRIMARY KEY AUTOINCREMENT,
-        ,CodigoCapitulo integer,
-        ,Nombre text NOT NULL UNIQUE,
-        ,FechaEstreno text,
+        CodigoSerie INTEGER PRIMARY KEY AUTOINCREMENT
+        ,CodigoCapitulo integer
+        ,Nombre text NOT NULL UNIQUE
+        ,FechaEstreno text
         ,Activo boolean,
         FOREIGN KEY (CodigoCapitulo) REFERENCES capitulos(CodigoCapitulo)
       );`
