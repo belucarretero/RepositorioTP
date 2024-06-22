@@ -11,6 +11,9 @@ import { Productora } from "./components/productora/Productora";
 import { Series } from "./components/series/Series";
 import { Actores } from "./components/Actores";
 import { Peliculas } from "./components/peliculas/Peliculas";
+import { ProductoraJWT } from "./components/productoraJWT/ProductoraJWT";
+import {RequireAuth} from "./components/RequiereAuth" ;
+import { Login } from "./components/login/Login";
 function App() {
   return (
     <>
@@ -24,9 +27,21 @@ function App() {
               <Route path="/capitulos" element={<Capitulos />} />
               <Route path="*" element={<Navigate to="/Inicio" replace />} />
               <Route path="/productora" element={<Productora/>} />
+
+              <Route
+                path="/productorajwt"
+                element={
+                  <RequireAuth>
+                    <ProductoraJWT />
+                  </RequireAuth>
+                }
+              />
+              <Route path="/login/:componentFrom" element={<Login />} />
+              <Route path="*" element={<Navigate to="/inicio" replace />} />
+
               <Route path="/series" element={<Series/>} />
               <Route path="/actores" element={<Actores />} />
-            <Route path="/peliculas" element={<Peliculas />} />
+              <Route path="/peliculas" element={<Peliculas />} />
             </Routes>
         </div>
         <Footer />

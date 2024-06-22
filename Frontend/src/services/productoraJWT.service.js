@@ -1,7 +1,13 @@
+import {config} from "../config";
 import httpService from "./http.service";
-//const urlResource = "https://labsys.frc.utn.edu.ar/dds-backend-2024/api/articulos";
-//import axios from "axios";
-//const urlResource = "https://labsys.frc.utn.edu.ar/dds-backend-2024/api/articulos";
+const urlServidor = "https://labsys.frc.utn.edu.ar/dds-backend-2024"
+const urlResourceProductora = urlServidor + "/api/productoraJWT";
+
+
+
+
+const urlResource = urlResourceProductora;
+
 
 async function Buscar(Nombre, Activo, Pagina) {
   const resp = await httpService.get(urlResource, {
@@ -11,21 +17,15 @@ async function Buscar(Nombre, Activo, Pagina) {
 }
 
 
-
-
 async function BuscarPorId(item) {
   const resp = await httpService.get(urlResource + "/" + item.CodigoProd);
   return resp.data;
 }
 
 
-
-
 async function ActivarDesactivar(item) {
   await httpService.delete(urlResource + "/" + item.CodigoProd);
 }
-
-
 
 
 async function Grabar(item) {
@@ -37,7 +37,6 @@ async function Grabar(item) {
 }
 
 
-export const articulosService = {
+export const productoraJWTService = {
   Buscar,BuscarPorId,ActivarDesactivar,Grabar
 };
-
