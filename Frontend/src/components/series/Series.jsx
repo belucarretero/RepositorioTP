@@ -3,7 +3,10 @@ import moment from "moment";
 import SeriesBuscar from "./SeriesBuscar";
 import SeriesListado from "./SeriesListado";
 import SeriesRegistro from "./SeriesRegistro";
-import { capitulosMockService as capitulosService } from "../../services/capitulos-mock.service";
+import { seriesService } from "../../services/series.service";
+import { capitulosService } from "../../services/capitulos.service";
+// import { capitulosMockService as capitulosService } from "../../services/capitulos-mock.service";
+import modalDialogService from "../../services/modalDialog.service";
 
 function Series() {
   const TituloAccionABMC = {
@@ -35,42 +38,38 @@ function Series() {
     BuscarCapitulos();
   }, []);
 
-async function Buscar() {
-    setAccionABMC("L");
-    // harcodeamos 2 articulos para probar
-    setItems([
-      {
-        CodigoSerie: 10000,
-        Nombre: "One Tree Hill",
-        CodigoCapitulo: 1000,
-        FechaEstreno: "2003-09-23",
-        Activo: true,
-      },
-      {
-        CodigoSerie: 20000,
-        Nombre: "Gilmore Girls",
-        CodigoCapitulo: 2000,
-        FechaEstreno: "2000-10-05",
-        Activo: false,
-      },
-    ]);
-    alert("Buscando...");
+  async function Buscar(_pagina) {
+    if (_pagina && _pagina !== Pagina) {
+      setPagina(_pagina);
+    }
+    // OJO Pagina (y cualquier estado...) se actualiza para el proximo render, para buscar usamos el parametro _pagina
+    else {
+      _pagina = Pagina;
+    }
+    modalDialogService.BloquearPantalla(true);
+    const data = await seriesService.Buscar(Nombre, Activo, _pagina);
+    modalDialogService.BloquearPantalla(false);
+    setItems(data.Items);
+    setRegistrosTotal(data.RegistrosTotal);
+
+    //generar array de las páginas para mostrar en select del paginador
+    const arrPaginas = [];
+    for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
+      arrPaginas.push(i);
+    }
+    setPaginas(arrPaginas);
   }
 
   async function BuscarPorId(item, accionABMC) {
+    const data = await seriesService.BuscarPorId(item);
+    setItem(data);
     setAccionABMC(accionABMC);
-    setItem(item);
-    if (accionABMC === "C") {
-      alert("Consultando...");
-    }
-    if (accionABMC === "M") {
-      alert("Modificando...");
-    }
   }
 
   function Consultar(item) {
     BuscarPorId(item, "C"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
   }
+  
   function Modificar(item) {
     if (!item.Activo) {
       alert("No puede modificarse un registro Inactivo.");
@@ -84,12 +83,12 @@ async function Buscar() {
     setItem({
         CodigoSerie: 10002,
         Nombre: '',
+      // ver esto
         CodigoCapitulo: 2001,
         FechaEstreno: moment(new Date()).format("YYYY-MM-DD"),
         Activo: true,
       });
-    alert("preparando el Alta...");
-    console.log(Item);
+    // modalDialogService.Alert("preparando el Alta...");
   }
 
 
@@ -98,24 +97,42 @@ async function Buscar() {
   }
 
   async function ActivarDesactivar(item) {
-    const resp = window.confirm(
-      "Está seguro que quiere " +
+    modalDialogService.Confirm(
+      "Esta seguro que quiere " +
         (item.Activo ? "desactivar" : "activar") +
-        " el registro?"
+        " el registro?",
+      undefined,
+      undefined,
+      undefined,
+      async () => {
+        await seriesService.ActivarDesactivar(item);
+        await Buscar();
+      }
     );
-    if (resp) {
-      alert("Activando/Desactivando...");
-    }
+
   }
 
   async function Grabar(item) {
-    alert(
-      "Registro " +
-        (AccionABMC === "A" ? "agregado" : "modificado") +
-        " correctamente."
-    );
-
+    // agregar o modificar
+    try
+    {
+      await seriesService.Grabar(item);
+    }
+    catch (error)
+    {
+      modalDialogService.Alert(error?.response?.data?.message ?? error.toString())
+      return;
+    }
+    await Buscar();
     Volver();
+  
+    //setTimeout(() => {
+      modalDialogService.Alert(
+        "Registro " +
+          (AccionABMC === "A" ? "agregado" : "modificado") +
+          " correctamente."
+      );
+    //}, 0);
   }
 
   // Volver/Cancelar desde Agregar/Modificar/Consultar
