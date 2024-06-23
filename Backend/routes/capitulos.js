@@ -16,7 +16,7 @@ router.get("/api/capitulos/:CodigoCapitulo", async function (req,res,next){
   // #swagger.parameters ['CodigoCapitulo'] = {description: 'Identificador del Capítulo..'}
   let data = await db.capitulos.findAll({
     attributes: ["CodigoCapitulo", "Nombre"],
-    where: {CodigoCapitulo: req.params.CodigoCapitulo},
+    where: { CodigoCapitulo: req.params.CodigoCapitulo },
   });
   if (data.length > 0) res.json(data[0]);
   else res.status(404).json({mensaje:'No encontrado'})

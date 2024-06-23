@@ -3,11 +3,12 @@ const db = require("aa-sqlite");
 
 async function CrearBaseSiNoExiste() {
   // abrir base, si no existe el archivo/base lo crea
-  await db.open("./.data/pymes.db");
-  //await db.open(process.env.base);
+  await db.open("./.data/contenidos.db");
 
   let existe = false;
   let res = null;
+  
+  // Crear tabla usuarios
   res = await db.get(
     "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'usuarios'",
     []
@@ -23,10 +24,8 @@ async function CrearBaseSiNoExiste() {
     );
   }
 
+  // Crear tabla documentales
   existe = false;
-
-
-
   res = await db.get(
     "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'documentales'",
     []
@@ -39,8 +38,6 @@ async function CrearBaseSiNoExiste() {
             , Nombre text NOT NULL UNIQUE
             );`
     );
-
-
     console.log("tabla documentales creada!");
     await db.run(
       `insert into documentales values
@@ -54,12 +51,12 @@ async function CrearBaseSiNoExiste() {
         (88888, 'El frio de la Antartida'),
         (99999, 'La vida de Rodrigo Bueno El Potro'),
         (12345, 'La historia del Cuarteto');`
-         
     );
- }
- existe = false;
- sql =
-    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'productora'";
+  }
+
+  // Crear tabla productora
+  existe = false;
+  let sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'productora'";
   res = await db.get(sql, []);
   if (res.contar > 0) existe = true;
   if (!existe) {
@@ -72,23 +69,24 @@ async function CrearBaseSiNoExiste() {
           , Codigo integer,
            FOREIGN KEY (Codigo) REFERENCES documentales(Codigo)
           );`
-  );
-  console.log("tabla productora creada!");
-  await db.run(
-    `insert into productora values
-    (1123, 'Rodrigo', '1973-05-24', 1, 11111),
-    (1223, 'Ulises', '1986-05-22', 1, 22222),
-    (1323, 'Cristian', '1970-05-24', 1, 33333),
-    (1423, 'Damian', '1990-04-17', 1, 44444),
-    (1523, 'Euguenia', '1950-12-24', 1, 55555),
-    (1623, 'Magali', '1973-05-24', 1, 66666),
-    (1723, 'Cristina', '2000-05-30', 1, 77777),
-    (1823, 'Rufino', '1952-02-01', 1, 88888),
-    (1923, 'Anabela', '1973-05-22', 0, 99999),
-    (1233, 'Vanesa', '1993-11-19', 1, 12345);`
-  );
+    );
+    console.log("tabla productora creada!");
+    await db.run(
+      `insert into productora values
+      (1123, 'Rodrigo', '1973-05-24', 1, 11111),
+      (1223, 'Ulises', '1986-05-22', 1, 22222),
+      (1323, 'Cristian', '1970-05-24', 1, 33333),
+      (1423, 'Damian', '1990-04-17', 1, 44444),
+      (1523, 'Euguenia', '1950-12-24', 1, 55555),
+      (1623, 'Magali', '1973-05-24', 1, 66666),
+      (1723, 'Cristina', '2000-05-30', 1, 77777),
+      (1823, 'Rufino', '1952-02-01', 1, 88888),
+      (1923, 'Anabela', '1973-05-22', 0, 99999),
+      (1233, 'Vanesa', '1993-11-19', 1, 12345);`
+    );
+  }
 
-  // Crear tabla series si no existe
+  // Crear tabla series
   existe = false;
   sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'series'";
   res = await db.get(sql, []);
@@ -118,8 +116,26 @@ async function CrearBaseSiNoExiste() {
         (90000, 9000, 'Succession', '2018-06-03', 1),
         (10001, 1111, 'How I Met Your Mother', '2005-09-19', 1);`
     );
+  }
 
-  // Crear tabla capitulos si no existe
+  // Crear tabla actores
+  existe = false;
+  res = await db.get(
+    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'actores'",
+    []
+  );
+  if (res.contar > 0) existe = true;
+  if (!existe) {
+    await db.run(
+      "CREATE table actores( CodigoAct INTEGER PRIMARY KEY AUTOINCREMENT, Nombre text NOT NULL UNIQUE);"
+    );
+    console.log("tabla actores creada!");
+    await db.run(
+      "insert into actores values	(54329,'John'),(54328,'Michael'),(54327,'Sarah'),(54326,'David'),(54325,'Laura'),(54324,'Simon'),(54323,'Alvaro'),(54322,'Sofia'),(54321,'Maria'),(54320,'Tobias');"
+    );
+  }
+
+  // Crear tabla capitulos
   existe = false;
   sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'capitulos'";
   res = await db.get(sql, []);
@@ -128,7 +144,7 @@ async function CrearBaseSiNoExiste() {
     await db.run(
       `CREATE table capitulos(
         CodigoCapitulo INTEGER PRIMARY KEY AUTOINCREMENT,
-        Nombre text NOT NULL UNIQUE,
+        Nombre text NOT NULL UNIQUE
       );`
     );
     console.log("tabla capitulos creada!");
@@ -146,31 +162,14 @@ async function CrearBaseSiNoExiste() {
         (1111, 'El Padrino');`
     );
   }
-  }
-}
+
+  // Crear tabla peliculas
   existe = false;
-  res = await db.get(
-    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'actores'",
-    []
-  );
-  if (res.contar > 0) existe = true;
-  if (!existe) {
-    await db.run(
-      "CREATE table actores( CodigoAct INTEGER PRIMARY KEY AUTOINCREMENT, Nombre text NOT NULL UNIQUE);"
-    );
-    console.log("tabla actores creada!");
-    await db.run(
-      "insert into actores values	(54329,'John'),(54328,'Michael'),(54327,'Sarah'),(54326,'David'),(54325,'Laura'),(54324,'Simon'),(54323,'Alvaro'),(54322,'Sofia'),(54321,'Maria'),(54320,'Tobias');"
-    );
-  }
-  existe = false;
-  sql =
-    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'peliculas'";
+  sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'peliculas'";
   res = await db.get(sql, []);
   if (res.contar > 0) existe = true;
   if (!existe) {
     await db.run(
-      // VER A PARTIR DE ACA
       `CREATE table peliculas( 
               CodigoPel INTEGER PRIMARY KEY AUTOINCREMENT
             , Nombre text NOT NULL UNIQUE
@@ -197,11 +196,11 @@ async function CrearBaseSiNoExiste() {
       ;`
     );
   }  
- // cerrar la base
- db.close();
-  
+
+  // cerrar la base
+  db.close();
 }
 
 CrearBaseSiNoExiste();
 
-module.exports =  CrearBaseSiNoExiste;
+module.exports = CrearBaseSiNoExiste;

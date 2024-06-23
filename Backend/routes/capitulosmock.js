@@ -57,9 +57,7 @@ router.get('/api/capitulosmock/:codigoCapitulo', async function (req, res) {
 });
 
 router.post('/api/capitulosmock/', (req, res) => {
-
   const { Nombre } = req.body;
-
   let cap = {
     Nombre,
     CodigoCapitulo: Math.floor(1000 + Math.random() * 9000),

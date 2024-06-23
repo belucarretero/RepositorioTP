@@ -8,8 +8,9 @@ async function BuscarPorId(CodigoCapitulo) {
 
 async function Agregar(capitulo) {
   capitulo.CodigoCapitulo = arrayCapitulos.length + 1;  // simula autoincremental
-    arrayCapitulos.push(capitulo);
+  arrayCapitulos.push(capitulo);
 }
+
 async function Modificar(capitulo) {
     let capituloEncontrado = arrayCapitulos.find((capitulofind) => capitulofind.CodigoCapitulo === capitulo.CodigoCapitulo);
     if (capituloEncontrado) {
