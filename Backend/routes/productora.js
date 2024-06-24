@@ -164,7 +164,7 @@ router.delete('/api/productora/:codigoProd', async (req, res) => {
     // baja lógica
     try {
       let data = await db.sequelize.query(
-        'UPDATE articulos SET Activo = case when Activo = 1 then 0 else 1 end WHERE CodigoProd = :CodigoProd',
+        'UPDATE productora SET Activo = case when Activo = 1 then 0 else 1 end WHERE CodigoProd = :CodigoProd',
         {
           replacements: { CodigoProd: +req.params.codigoProd },
         }
