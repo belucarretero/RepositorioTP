@@ -87,7 +87,7 @@ async function BuscarPorId(item, accionABMC) {
   async function Agregar() {
     setAccionABMC("A");
     setItem({
-        CodigoProd: 1234,
+        CodigoProd: 0,
         Nombre: '',
         Codigo: '',
         Fecha_nacimiento: moment(new Date()).format("YYYY-MM-DD"),
