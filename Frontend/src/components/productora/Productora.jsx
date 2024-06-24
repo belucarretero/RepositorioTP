@@ -47,7 +47,7 @@ function Productora() {
       _pagina = Pagina;
     }
     modalDialogService.BloquearPantalla(true);
-    const data = await documentalesService.Buscar(Nombre, Activo, _pagina);
+    const data = await productoraService.Buscar(Nombre, Activo, _pagina);
     modalDialogService.BloquearPantalla(false);
 
     setItems(data.Items);
@@ -111,7 +111,7 @@ async function BuscarPorId(item, accionABMC) {
       undefined,
       undefined,
       async () => {
-        await articulosService.ActivarDesactivar(item);
+        await productoraService.ActivarDesactivar(item);
         await Buscar();
       }
     );
