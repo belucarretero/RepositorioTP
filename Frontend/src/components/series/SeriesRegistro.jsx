@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 
 export default function SeriesRegistro({
   AccionABMC,
-  Capitulos,
+  Capitulos = [],
   Item,
   Grabar,
   Volver,
@@ -21,9 +21,7 @@ export default function SeriesRegistro({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="container-fluid">
-
         <fieldset disabled={AccionABMC === "C"}>
-
           {/* campo nombre */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
@@ -58,8 +56,6 @@ export default function SeriesRegistro({
             </div>
           </div>
 
-          
-
           {/* campo CodigoCapitulo */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
@@ -77,12 +73,13 @@ export default function SeriesRegistro({
                   (errors?.CodigoCapitulo ? "is-invalid" : "")
                 }
               >
-                <option value="" key={1}></option>
-                {Capitulos?.map((x) => (
-                  <option value={x.CodigoCapitulo} key={x.CodigoCapitulo}>
-                    {x.Nombre}
-                  </option>
-                ))}
+                <option value="" key={0}></option>
+                {Array.isArray(Capitulos) &&
+                  Capitulos.map((x) => (
+                    <option value={x.CodigoCapitulo} key={x.CodigoCapitulo}>
+                      {x.Nombre}
+                    </option>
+                  ))}
               </select>
               <div className="invalid-feedback">
                 {errors?.CodigoCapitulo?.message}
@@ -168,7 +165,6 @@ export default function SeriesRegistro({
             Revisar los datos ingresados...
           </div>
         )}
-
       </div>
     </form>
   );

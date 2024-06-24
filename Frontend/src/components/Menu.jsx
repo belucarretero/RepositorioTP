@@ -78,6 +78,11 @@ function Menu() {
                 Productora JWT
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" title="exclusivo para administradores" to="/seriesjwt">
+                Series JWT
+              </NavLink>
+            </li>
             <li className="nav-item dropdown bg-dark">
               <a
                 className="nav-link dropdown-toggle"

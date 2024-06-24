@@ -81,14 +81,14 @@ function Series() {
   async function Agregar() {
     setAccionABMC("A");
     setItem({
-        CodigoSerie: 10002,
+        CodigoSerie: 0,
         Nombre: '',
-      // ver esto
-        CodigoCapitulo: 2001,
+        CodigoCapitulo: '',
         FechaEstreno: moment(new Date()).format("YYYY-MM-DD"),
         Activo: true,
       });
-    // modalDialogService.Alert("preparando el Alta...");
+    alert("preparando el Alta...");
+    console.log(Item);
   }
 
 
