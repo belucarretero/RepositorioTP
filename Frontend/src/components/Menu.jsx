@@ -92,12 +92,12 @@ function Menu() {
               <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                 <li>
                   <a className="dropdown-item" href="#!">
-                    Ventas
+                    Lo mas visto
                   </a>
                 </li>
                 <li>
                   <a className="dropdown-item  dropdown-menu-dark" href="#!">
-                    Compras
+                    Recomendaciones
                   </a>
                 </li>
                 <li>
@@ -105,7 +105,7 @@ function Menu() {
                 </li>
                 <li>
                   <a className="dropdown-item  dropdown-menu-dark" href="#!">
-                    Libro de IVA
+                    Tu lista
                   </a>
                 </li>
               </ul>
