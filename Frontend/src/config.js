@@ -1,9 +1,9 @@
 // opcion 1 cuando se hacen pruebas locales
-//const urlServidor = "http://localhost:3000"
+const urlServidor = "http://localhost:5173"
 
 
 // opcion 2 cuando se despliega el frontend en un servidor distinto al backend
-const urlServidor = "https://labsys.frc.utn.edu.ar/RepositorioTP-2024"
+//const urlServidor = "https://labsys.frc.utn.edu.ar/RepositorioTP-2024"
 //const urlServidor = "https://RepositorioTP.azurewebsites.net"
 //const urlServidor = "https://webapi.pymes.net.ar"
 
@@ -17,6 +17,9 @@ const urlServidor = "https://labsys.frc.utn.edu.ar/RepositorioTP-2024"
 const urlResourceProductora = urlServidor + "/api/productora";
 const urlResourceDocumentales = urlServidor + "/api/documentales";
 const urlResourceProductoraJWT = urlServidor + "/api/ProductoraJWT";
+const urlResourceCapitulos = urlServidor + "/api/capitulos";
+const urlResourceSeries = urlServidor + "/api/series";
+const urlResourceSeriesJWT = urlServidor + "/api/SeriesJWT";
 
 
 
@@ -25,5 +28,9 @@ export const config = {
     urlResourceProductora,
     urlResourceDocumentales,
     urlResourceProductoraJWT,
+    urlResourceCapitulos,
+    urlResourceSeries,
+    urlResourceSeriesJWT,
 }
+
 

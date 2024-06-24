@@ -14,6 +14,7 @@ import { Peliculas } from "./components/peliculas/Peliculas";
 import { ProductoraJWT } from "./components/productoraJWT/ProductoraJWT";
 import {RequireAuth} from "./components/RequiereAuth" ;
 import { Login } from "./components/login/Login";
+
 function App() {
   return (
     <>

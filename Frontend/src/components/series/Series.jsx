@@ -27,7 +27,7 @@ function Series() {
   const [Pagina, setPagina] = useState(1);
   const [Paginas, setPaginas] = useState([]);
 
-  //const [Capitulos, setCapitulos] = useState(null);
+  const [Capitulos, setCapitulos] = useState(null);
 
   // cargar al "montar" el componente, solo la primera vez (por la dependencia [])
   useEffect(() => {

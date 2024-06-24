@@ -36,16 +36,21 @@ httpService.interceptors.response.use(
     modalService.BloquearPantalla(false);
 
 
-    if (error.response.status === 401) {
-      // no auntenticado
-      error.message = "debe loguearse para acceder a esta funcionalidad";
-    } else if (error.response.status === 403) {
-      // no auntenticado
-      error.message = "usuario no autorizado para acceder a esta funcionalidad";
+    if (error.response) {
+      if (error.response.status === 401) {
+        // no autenticado
+        error.message = "debe loguearse para acceder a esta funcionalidad";
+      } else if (error.response.status === 403) {
+        // no autorizado
+        error.message = "usuario no autorizado para acceder a esta funcionalidad";
+      } else {
+        error.message =
+          error.response.data?.message ??
+          "Actualmente tenemos inconvenientes en el servidor, por favor intente más tarde";
+      }
     } else {
-      error.message =
-        error?.response?.data?.message ??
-        "Actualmente tenemos inconvenientes en el servidor, por favor intente más tarde";
+      // Handle errors not related to HTTP responses (e.g., network issues)
+      error.message = "Error de red o servidor no disponible";
     }
     modalService.Alert(error.message);
 
