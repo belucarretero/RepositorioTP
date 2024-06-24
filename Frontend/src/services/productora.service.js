@@ -2,6 +2,8 @@ import httpService from "./http.service";
 //const urlResource = "https://labsys.frc.utn.edu.ar/dds-backend-2024/api/articulos";
 //import axios from "axios";
 //const urlResource = "https://labsys.frc.utn.edu.ar/dds-backend-2024/api/articulos";
+import {config} from "../config";
+const urlResource = config.urlResourceProductora;
 
 async function Buscar(Nombre, Activo, Pagina) {
   const resp = await httpService.get(urlResource, {
