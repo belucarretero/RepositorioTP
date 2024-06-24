@@ -56,12 +56,12 @@ async function CrearBaseSiNoExiste() {
 
   // Crear tabla productora
   existe = false;
-  let sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'productora'";
+  let sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'productoras'";
   res = await db.get(sql, []);
   if (res.contar > 0) existe = true;
   if (!existe) {
     await db.run(
-      `CREATE table productora( 
+      `CREATE table productoras( 
             CodigoProd INTEGER PRIMARY KEY AUTOINCREMENT
           , Nombre text NOT NULL UNIQUE
           , Fecha_nacimiento text
@@ -70,9 +70,9 @@ async function CrearBaseSiNoExiste() {
            FOREIGN KEY (Codigo) REFERENCES documentales(Codigo)
           );`
     );
-    console.log("tabla productora creada!");
+    console.log("tabla productoras creada!");
     await db.run(
-      `insert into productora values
+      `insert into productoras values
       (1123, 'Rodrigo', '1973-05-24', 1, 11111),
       (1223, 'Ulises', '1986-05-22', 1, 22222),
       (1323, 'Cristian', '1970-05-24', 1, 33333),

@@ -34,7 +34,7 @@ const documentales = sequelize.define(
   }
 );
 const productora = sequelize.define(
-  "productora",
+  "productoras",
   {
     CodigoProd: {
       type: DataTypes.INTEGER,
