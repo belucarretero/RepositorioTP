@@ -182,7 +182,7 @@ function Series() {
       {/* Formulario de alta/modificacion/consulta */}
       {AccionABMC !== "L" && 
         <SeriesRegistro
-          {...{ AccionABMC, Documentales, Item, Grabar, Volver }}
+          {...{ AccionABMC, Capitulos, Item, Grabar, Volver }}
         />
       }
     </div>

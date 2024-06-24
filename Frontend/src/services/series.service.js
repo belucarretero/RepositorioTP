@@ -2,9 +2,9 @@ import httpService from "./http.service";
 //const urlResource = "https://labsys.frc.utn.edu.ar/dds-express/api/peliculas";
 
 // mas adelante podemos usar un archivo de configuracion para el urlResource
- import {config} from "../config";
- const urlResource = config.urlResourceSeries;
-
+//import {config} from "../config";
+//const urlResource = config.urlResourceSeries;
+const urlResource = "http://localhost:5173/api/series";
 
 async function Buscar(Nombre, Activo, Pagina) {
   const resp = await httpService.get(urlResource, {

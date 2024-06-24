@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 export default function SeriesRegistro({
@@ -8,9 +8,18 @@ export default function SeriesRegistro({
   Grabar,
   Volver,
 }) {
-  if (!Item) return null;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, touchedFields, isValid, isSubmitted },
+  } = useForm({ values: Item });
+
+  const onSubmit = (data) => {
+    Grabar(data);
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="container-fluid">
 
         <fieldset disabled={AccionABMC === "C"}>
@@ -25,13 +34,31 @@ export default function SeriesRegistro({
             <div className="col-sm-8 col-md-6">
               <input
                 type="text"
-                name="Nombre"
-                value={Item?.Nombre}
+                {...register("Nombre", {
+                  required: { value: true, message: "Nombre es requerido" },
+                  minLength: {
+                    value: 4,
+                    message: "Nombre debe tener al menos 4 caracteres",
+                  },
+                  maxLength: {
+                    value: 55,
+                    message: "Nombre debe tener como máximo 55 caracteres",
+                  },
+                })}
                 autoFocus
-                className="form-control "
+                className={
+                  "form-control " + (errors?.Nombre ? "is-invalid" : "")
+                }
               />
+              {errors?.Nombre && touchedFields.Nombre && (
+                <div className="invalid-feedback">
+                  {errors?.Nombre?.message}
+                </div>
+              )}
             </div>
           </div>
+
+          
 
           {/* campo CodigoCapitulo */}
           <div className="row">
@@ -42,9 +69,13 @@ export default function SeriesRegistro({
             </div>
             <div className="col-sm-8 col-md-6">
               <select
-                name="CodigoCapitulo"
-                className="form-control"
-			value = {Item?.CodigoCapitulo}
+                {...register("CodigoCapitulo", {
+                  required: { value: true, message: "El capítulo es requerido" },
+                })}
+                className={
+                  "form-control " +
+                  (errors?.CodigoCapitulo ? "is-invalid" : "")
+                }
               >
                 <option value="" key={1}></option>
                 {Capitulos?.map((x) => (
@@ -53,6 +84,9 @@ export default function SeriesRegistro({
                   </option>
                 ))}
               </select>
+              <div className="invalid-feedback">
+                {errors?.CodigoCapitulo?.message}
+              </div>
             </div>
           </div>
 
@@ -60,16 +94,22 @@ export default function SeriesRegistro({
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="FechaEstreno">
-                Fecha Estreno <span className="text-danger">*</span>:
+                Fecha Estreno<span className="text-danger">*</span>:
               </label>
             </div>
             <div className="col-sm-8 col-md-6">
               <input
                 type="date"
-                name="FechaEstreno"
-                className="form-control"
-                    value={Item?.FechaEstreno}
+                {...register("FechaEstreno", {
+                  required: { value: true, message: "Fecha de estreno es requerida" }
+                })}
+                className={
+                  "form-control " + (errors?.FechaEstreno ? "is-invalid" : "")
+                }
               />
+              <div className="invalid-feedback">
+                {errors?.FechaEstreno?.message}
+              </div>
             </div>
           </div>
 
@@ -83,14 +123,19 @@ export default function SeriesRegistro({
             <div className="col-sm-8 col-md-6">
               <select
                 name="Activo"
-                className="form-control"
-			value = {Item?.Activo}
+                {...register("Activo", {
+                  required: { value: true, message: "Activo es requerido" },
+                })}
+                className={
+                  "form-control" + (errors?.Activo ? " is-invalid" : "")
+                }
                 disabled
               >
                 <option value={null}></option>
                 <option value={false}>NO</option>
                 <option value={true}>SI</option>
               </select>
+              <div className="invalid-feedback">{errors?.Activo?.message}</div>
             </div>
           </div>
 
@@ -117,12 +162,14 @@ export default function SeriesRegistro({
         </div>
 
         {/* texto: Revisar los datos ingresados... */}
-        <div className="row alert alert-danger mensajesAlert">
-          <i className="fa fa-exclamation-sign"></i>
-          Revisar los datos ingresados...
-        </div>
+        {!isValid && isSubmitted && (
+          <div className="row alert alert-danger mensajesAlert">
+            <i className="fa fa-exclamation-sign"></i>
+            Revisar los datos ingresados...
+          </div>
+        )}
 
       </div>
     </form>
   );
-} // SeriesRegistro Terminado
+}

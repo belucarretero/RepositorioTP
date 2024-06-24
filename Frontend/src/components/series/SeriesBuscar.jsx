@@ -2,7 +2,7 @@ import React from "react";
 export default function SeriesBuscar ({Nombre, setNombre, Activo, setActivo, Buscar, Agregar}) {
 
     return (
-    <form name="FormBusqueda">
+    <form>
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-4 col-md-2">
