@@ -29,7 +29,7 @@ export default function SeriesListado({
               <tr key={Item.CodigoSerie}>
                 <td>{Item.Nombre}</td>
                 <td className="text-end">
-                  {moment(Item.FechaEstreno).format("DD/MM/YYYY")}
+                  {moment(Item.FechaEstreno).format("YYYY-MM-DD")}
                 </td>
                 <td>{Item.Activo ? "SI" : "NO"}</td>
                 <td className="text-center text-nowrap">

@@ -8,7 +8,7 @@ import {Capitulos} from "./components/Capitulos";
 import {Menu} from "./components/Menu";
 import { Footer } from "./components/Footer";
 import { Productora } from "./components/productora/Productora";
-import { Series } from "./components/series/Series";
+import { Serie } from "./components/series/Serie";
 import { Actores } from "./components/Actores";
 import { Peliculas } from "./components/peliculas/Peliculas";
 import { PeliculasJWT } from "./components/peliculasJWT/PeliculasJWT";
@@ -58,7 +58,7 @@ function App() {
               <Route path="/login/:componentFrom" element={<Login />} />
               <Route path="*" element={<Navigate to="/inicio" replace />} />
 
-              <Route path="/series" element={<Series/>} />
+              <Route path="/serie" element={<Serie/>} />
               <Route path="/actores" element={<Actores />} />
               <Route path="/peliculas" element={<Peliculas />} />
             </Routes>

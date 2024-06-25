@@ -3,7 +3,7 @@ const db = require("aa-sqlite");
 
 async function CrearBaseSiNoExiste() {
   // abrir base, si no existe el archivo/base lo crea
-  await db.open("./.data/contenidos.db");
+  await db.open("./.data/contenido.db");
 
   let existe = false;
   let res = null;

@@ -7,7 +7,7 @@ import { seriesService } from "../../services/series.service";
 import { capitulosService } from "../../services/capitulos.service";
 import modalDialogService from "../../services/modalDialog.service";
 
-function Series() {
+function Serie() {
   const TituloAccionABMC = {
     A: "(Agregar)",
     B: "(Eliminar)",
@@ -169,4 +169,4 @@ function Series() {
   );
 }
 
-export { Series };
+export { Serie };

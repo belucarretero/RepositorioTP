@@ -1,13 +1,13 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const db = require("../base-orm/sequelize-init");
+const db = require('../base-orm/sequelize-init');
 const { Op, ValidationError } = require('sequelize');
 const auth = require('../seguridad/auth');
 
-router.get("/api/series", async function (req, res, next) {
-  // #swagger.tags = ['Series']
-  // #swagger.summary = 'obtiene todos las series'
-  // Consulta de series con filtros y paginacion
+router.get('/api/serie', async function (req, res, next) {
+  // #swagger.tags = ['Articulos']
+  // #swagger.summary = 'obtiene todos los Articulos'
+  // consulta de artículos con filtros y paginacion
 
   let where = {};
   if (req.query.Nombre != undefined && req.query.Nombre !== '') {
@@ -16,11 +16,10 @@ router.get("/api/series", async function (req, res, next) {
     };
   }
   if (req.query.Activo != undefined && req.query.Activo !== '') {
-    // True o false en el modelo, en base de datos es 1 o 0
-    // Convertir el string a booleano
+    // true o false en el modelo, en base de datos es 1 o 0
+    // convertir el string a booleano
     where.Activo = req.query.Activo === 'true';
   }
-
   const Pagina = req.query.Pagina ?? 1;
   const TamañoPagina = 10;
   const { count, rows } = await db.series.findAndCountAll({
@@ -39,27 +38,25 @@ router.get("/api/series", async function (req, res, next) {
   return res.json({ Items: rows, RegistrosTotal: count });
 });
 
-router.get('/api/series/:codigoSerie:', async function (req, res, next) {
-  console.log("Buscando serie con código:", req.params.codigoSerie);
-  // #swagger.tags = ['Series']
-  // #swagger.summary = 'Obtiene una serie'
-  // #swagger.parameters['codigoSerie'] = { description: 'identificador de la serie...' }
-
+router.get('/api/serie/:codigoSerie', async function (req, res, next) { 
+    console.log(req.params.nombre);
+  // #swagger.tags = ['Productora']
+  // #swagger.summary = 'obtiene un Articulo'
+  // #swagger.parameters['codigoProd'] = { description: 'identificador del Articulo...' }
   let items = await db.series.findOne({
     attributes: [
       'CodigoSerie',
+      'CodigoCapitulo',
       'Nombre',
       'FechaEstreno',
-      'CodigoCapitulo',
       'Activo',
     ],
     where: { CodigoSerie: req.params.codigoSerie },
   });
-  console.log("Resultado de la consulta:", items); // Agrega esta línea para ver el resultado en la consola
   res.json(items);
 });
 
-router.post('/api/series/', async (req, res) => {
+router.post('/api/serie/', async (req, res) => {
   // #swagger.tags = ['Series']
   // #swagger.summary = 'Agrega una serie'
   /*    #swagger.parameters['item'] = {
@@ -92,7 +89,7 @@ router.post('/api/series/', async (req, res) => {
   }
 });
 
-router.put('/api/series/:codigoSerie', async (req, res) => {
+router.put('/api/serie/:codigoSerie', async (req, res) => {
   // #swagger.tags = ['Series']
   // #swagger.summary = 'actualiza una serie'
   // #swagger.parameters['codigoCapitulo'] = { description: 'identificador de la serie...' }
@@ -139,7 +136,7 @@ router.put('/api/series/:codigoSerie', async (req, res) => {
   }
 });
 
-router.delete('/api/series/:codigoSerie', async (req, res) => {
+router.delete('/api/serie/:codigoSerie', async (req, res) => {
   // #swagger.tags = ['Series']
   // #swagger.summary = 'elimina una serie'
   // #swagger.parameters['codigoSerie'] = { description: 'identificador de la serie..' }
@@ -208,5 +205,6 @@ router.get(
     res.json(items);
   }
 );
+
 
 module.exports = router;
