@@ -31,7 +31,20 @@ const documentales = sequelize.define(
         msg: "este Nombre ya existe en la tabla!",
       },
     },
-  }
+  },
+
+  {
+  hooks: {
+    beforeValidate: function (documentales, options) {
+      if (typeof documentales.Nombre === "string") {
+        documentales.Nombre = documentales.Nombre.toUpperCase().trim();
+      }
+    },
+  },
+
+  timestamps: false,
+
+  },
 );
 const productora = sequelize.define(
   "productoras",
@@ -87,6 +100,19 @@ const productora = sequelize.define(
           }
         }
       },
+  },
+
+  {
+  hooks: {
+    beforeValidate: function (productora, options) {
+      if (typeof productora.Nombre === "string") {
+        productora.Nombre = productora.Nombre.toUpperCase().trim();
+      }
+    },
+  },
+
+  timestamps: false,
+
   },
 );
 
