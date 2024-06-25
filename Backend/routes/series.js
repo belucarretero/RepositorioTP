@@ -30,7 +30,7 @@ router.get("/api/series", async function (req, res, next) {
       'FechaEstreno',
       'Activo',
     ],
-    order: [['Nombre', 'ASC']],
+    order: [['CodigoSerie', 'ASC']],
     where,
     offset: (Pagina - 1) * TamañoPagina,
     limit: TamañoPagina,
@@ -39,7 +39,7 @@ router.get("/api/series", async function (req, res, next) {
   return res.json({ Items: rows, RegistrosTotal: count });
 });
 
-router.get('/api/series/CodigoSerie:', async function (req, res, next) {
+router.get('/api/series/:codigoSerie:', async function (req, res, next) {
   // #swagger.tags = ['Series']
   // #swagger.summary = 'Obtiene una serie'
   // #swagger.parameters['codigoSerie'] = { description: 'identificador de la serie...' }
@@ -69,6 +69,7 @@ router.post('/api/series/', async (req, res) => {
   try {
     let data = await db.series.create({
       Nombre: req.body.Nombre,
+      CodigoSerie: req.body.CodigoSerie,
       FechaEstreno: req.body.FechaEstreno,
       CodigoCapitulo: req.body.CodigoCapitulo,
       Activo: req.body.Activo
@@ -115,6 +116,7 @@ router.put('/api/series/:codigoSerie', async (req, res) => {
       return;
     }
     item.Nombre = req.body.Nombre;
+    item.CodigoSerie = req.body.CodigoSerie;
     item.FechaEstreno = req.body.FechaEstreno;
     item.CodigoCapitulo = req.body.CodigoCapitulo;
     item.Activo = req.body.Activo;
@@ -199,7 +201,7 @@ router.get(
       'CodigoCapitulo',
       'Activo',
       ],
-      order: [['Nombre', 'ASC']],
+      order: [['CodigoSerie', 'ASC']],
     });
     res.json(items);
   }

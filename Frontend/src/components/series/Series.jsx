@@ -28,7 +28,6 @@ function Series() {
 
   const [Capitulos, setCapitulos] = useState(null);
 
-  // cargar al "montar" el componente, solo la primera vez (por la dependencia [])
   useEffect(() => {
     async function BuscarCapitulos() {
       let data = await capitulosService.Buscar();
@@ -38,17 +37,17 @@ function Series() {
   }, []);
 
   async function Buscar(_pagina) {
-    // Verificar y ajustar el valor de la página
-    _pagina = _pagina && !isNaN(_pagina) ? _pagina : Pagina;
-    setPagina(_pagina);
-
+    if (_pagina && _pagina !== Pagina) {
+      setPagina(_pagina);
+    } else {
+      _pagina = Pagina;
+    }
     modalDialogService.BloquearPantalla(true);
     const data = await seriesService.Buscar(Nombre, Activo, _pagina);
     modalDialogService.BloquearPantalla(false);
     setItems(data.Items);
     setRegistrosTotal(data.RegistrosTotal);
 
-    // generar array de las páginas para mostrar en select del paginador
     const arrPaginas = [];
     for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
       arrPaginas.push(i);
@@ -57,13 +56,13 @@ function Series() {
   }
 
   async function BuscarPorId(item, accionABMC) {
-    const data = await seriesService.BuscarPorId(item.CodigoSerie);
+    const data = await seriesService.BuscarPorId(item);
     setItem(data);
     setAccionABMC(accionABMC);
   }
 
   function Consultar(item) {
-    BuscarPorId(item, "C"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+    BuscarPorId(item.CodigoSerie, "C");
   }
 
   function Modificar(item) {
@@ -71,7 +70,7 @@ function Series() {
       alert("No puede modificarse un registro Inactivo.");
       return;
     }
-    BuscarPorId(item, "M"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+    BuscarPorId(item.CodigoSerie, "M");
   }
 
   async function Agregar() {
@@ -82,8 +81,6 @@ function Series() {
       FechaEstreno: moment(new Date()).format("DD/MM/YYYY"),
       Activo: true,
     });
-    alert("preparando el Alta...");
-    console.log(Item);
   }
 
   function Imprimir() {
@@ -93,8 +90,8 @@ function Series() {
   async function ActivarDesactivar(item) {
     modalDialogService.Confirm(
       "Esta seguro que quiere " +
-        (item.Activo ? "desactivar" : "activar") +
-        " el registro?",
+      (item.Activo ? "desactivar" : "activar") +
+      " el registro?",
       undefined,
       undefined,
       undefined,
@@ -106,7 +103,6 @@ function Series() {
   }
 
   async function Grabar(item) {
-    // agregar o modificar
     try {
       await seriesService.Grabar(item);
     } catch (error) {
@@ -115,15 +111,13 @@ function Series() {
     }
     await Buscar();
     Volver();
-
     modalDialogService.Alert(
       "Registro " +
-        (AccionABMC === "A" ? "agregado" : "modificado") +
-        " correctamente."
+      (AccionABMC === "A" ? "agregado" : "modificado") +
+      " correctamente."
     );
   }
 
-  // Volver/Cancelar desde Agregar/Modificar/Consultar
   function Volver() {
     setAccionABMC("L");
   }
@@ -137,15 +131,14 @@ function Series() {
       {AccionABMC === "L" && (
         <SeriesBuscar
           Nombre={Nombre}
-          setNombre={setNombre}
           Activo={Activo}
+          setNombre={setNombre}
           setActivo={setActivo}
           Buscar={Buscar}
           Agregar={Agregar}
         />
       )}
 
-      {/* Tabla de resutados de busqueda y Paginador */}
       {AccionABMC === "L" && Items?.length > 0 && (
         <SeriesListado
           {...{
@@ -162,21 +155,18 @@ function Series() {
         />
       )}
 
-      {AccionABMC === "L" && Items?.length === 0 && (
-        <div className="alert alert-info mensajesAlert">
-          <i className="fa fa-exclamation-sign"></i>
-          No se encontraron registros...
-        </div>
-      )}
-
-      {/* Formulario de alta/modificacion/consulta */}
       {AccionABMC !== "L" && (
         <SeriesRegistro
-          {...{ AccionABMC, Capitulos, Item, Grabar, Volver }}
+          {...{
+            Capitulos,
+            Item,
+            Grabar,
+            Volver,
+          }}
         />
       )}
     </div>
   );
 }
 
-export { Series }; //Revisado
+export { Series };
