@@ -1,5 +1,5 @@
 // opcion 1 cuando se hacen pruebas locales
-const urlServidor = "http://localhost:5173"
+const urlServidor = "http://localhost:3000"
 
 
 // opcion 2 cuando se despliega el frontend en un servidor distinto al backend
