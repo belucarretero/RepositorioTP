@@ -5,7 +5,6 @@ import SeriesListado from "./SeriesListado";
 import SeriesRegistro from "./SeriesRegistro";
 import { seriesService } from "../../services/series.service";
 import { capitulosService } from "../../services/capitulos.service";
-// import { capitulosMockService as capitulosService } from "../../services/capitulos-mock.service";
 import modalDialogService from "../../services/modalDialog.service";
 
 function Series() {
@@ -39,20 +38,17 @@ function Series() {
   }, []);
 
   async function Buscar(_pagina) {
-    if (_pagina && _pagina !== Pagina) {
-      setPagina(_pagina);
-    }
-    // OJO Pagina (y cualquier estado...) se actualiza para el proximo render, para buscar usamos el parametro _pagina
-    else {
-      _pagina = Pagina;
-    }
+    // Verificar y ajustar el valor de la página
+    _pagina = _pagina && !isNaN(_pagina) ? _pagina : Pagina;
+    setPagina(_pagina);
+
     modalDialogService.BloquearPantalla(true);
     const data = await seriesService.Buscar(Nombre, Activo, _pagina);
     modalDialogService.BloquearPantalla(false);
     setItems(data.Items);
     setRegistrosTotal(data.RegistrosTotal);
 
-    //generar array de las páginas para mostrar en select del paginador
+    // generar array de las páginas para mostrar en select del paginador
     const arrPaginas = [];
     for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
       arrPaginas.push(i);
@@ -61,15 +57,15 @@ function Series() {
   }
 
   async function BuscarPorId(item, accionABMC) {
-    const data = await seriesService.BuscarPorId(item);
+    const data = await seriesService.BuscarPorId(item.CodigoSerie);
     setItem(data);
     setAccionABMC(accionABMC);
   }
 
   function Consultar(item) {
-    Buscar(item, "C"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+    BuscarPorId(item, "C"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
   }
-  
+
   function Modificar(item) {
     if (!item.Activo) {
       alert("No puede modificarse un registro Inactivo.");
@@ -81,15 +77,14 @@ function Series() {
   async function Agregar() {
     setAccionABMC("A");
     setItem({
-        CodigoSerie: 0,
-        Nombre: '',
-        FechaEstreno: moment(new Date()).format("DD/MM/YYYY"),
-        Activo: true,
-      });
+      CodigoSerie: 0,
+      Nombre: '',
+      FechaEstreno: moment(new Date()).format("DD/MM/YYYY"),
+      Activo: true,
+    });
     alert("preparando el Alta...");
     console.log(Item);
   }
-
 
   function Imprimir() {
     alert("En desarrollo...");
@@ -108,30 +103,24 @@ function Series() {
         await Buscar();
       }
     );
-
   }
 
   async function Grabar(item) {
     // agregar o modificar
-    try
-    {
+    try {
       await seriesService.Grabar(item);
-    }
-    catch (error)
-    {
-      modalDialogService.Alert(error?.response?.data?.message ?? error.toString())
+    } catch (error) {
+      modalDialogService.Alert(error?.response?.data?.message ?? error.toString());
       return;
     }
     await Buscar();
     Volver();
-  
-    //setTimeout(() => {
-      modalDialogService.Alert(
-        "Registro " +
-          (AccionABMC === "A" ? "agregado" : "modificado") +
-          " correctamente."
-      );
-    //}, 0);
+
+    modalDialogService.Alert(
+      "Registro " +
+        (AccionABMC === "A" ? "agregado" : "modificado") +
+        " correctamente."
+    );
   }
 
   // Volver/Cancelar desde Agregar/Modificar/Consultar
@@ -145,31 +134,31 @@ function Series() {
         Series <small>{TituloAccionABMC[AccionABMC]}</small>
       </div>
 
-      { AccionABMC === "L" && (
-       <SeriesBuscar
-        Nombre={Nombre}
-        setNombre={setNombre}
-        Activo={Activo}
-        setActivo={setActivo}
-        Buscar={Buscar}
-        Agregar={Agregar}
+      {AccionABMC === "L" && (
+        <SeriesBuscar
+          Nombre={Nombre}
+          setNombre={setNombre}
+          Activo={Activo}
+          setActivo={setActivo}
+          Buscar={Buscar}
+          Agregar={Agregar}
         />
       )}
 
       {/* Tabla de resutados de busqueda y Paginador */}
       {AccionABMC === "L" && Items?.length > 0 && (
         <SeriesListado
-        {...{
-          Items,
-          Consultar,
-          Modificar,
-          ActivarDesactivar,
-          Imprimir,
-          Pagina,
-          RegistrosTotal,
-          Paginas,
-          Buscar,
-        }}
+          {...{
+            Items,
+            Consultar,
+            Modificar,
+            ActivarDesactivar,
+            Imprimir,
+            Pagina,
+            RegistrosTotal,
+            Paginas,
+            Buscar,
+          }}
         />
       )}
 
@@ -189,5 +178,5 @@ function Series() {
     </div>
   );
 }
-export { Series }; //Revisado
 
+export { Series }; //Revisado

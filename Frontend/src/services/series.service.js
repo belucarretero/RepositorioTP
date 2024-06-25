@@ -2,8 +2,8 @@ import httpService from "./http.service";
 //const urlResource = "https://labsys.frc.utn.edu.ar/dds-express/api/series";
 
 // mas adelante podemos usar un archivo de configuracion para el urlResource
- import {config} from "../config";
- const urlResource = config.urlResourceSeries;
+import {config} from "../config";
+const urlResource = config.urlResourceSeries;
 
 
 async function Buscar(Nombre, Activo, Pagina) {
