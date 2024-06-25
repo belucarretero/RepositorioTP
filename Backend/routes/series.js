@@ -40,6 +40,7 @@ router.get("/api/series", async function (req, res, next) {
 });
 
 router.get('/api/series/:codigoSerie:', async function (req, res, next) {
+  console.log("Buscando serie con código:", req.params.codigoSerie);
   // #swagger.tags = ['Series']
   // #swagger.summary = 'Obtiene una serie'
   // #swagger.parameters['codigoSerie'] = { description: 'identificador de la serie...' }
@@ -54,6 +55,7 @@ router.get('/api/series/:codigoSerie:', async function (req, res, next) {
     ],
     where: { CodigoSerie: req.params.codigoSerie },
   });
+  console.log("Resultado de la consulta:", items); // Agrega esta línea para ver el resultado en la consola
   res.json(items);
 });
 
@@ -115,8 +117,8 @@ router.put('/api/series/:codigoSerie', async (req, res) => {
       res.status(404).json({ message: 'Serie no encontrada' });
       return;
     }
-    item.Nombre = req.body.Nombre;
     item.CodigoSerie = req.body.CodigoSerie;
+    item.Nombre = req.body.Nombre;
     item.FechaEstreno = req.body.FechaEstreno;
     item.CodigoCapitulo = req.body.CodigoCapitulo;
     item.Activo = req.body.Activo;
