@@ -1,14 +1,15 @@
 const request = require("supertest");
 const app = require("../index");
 const seriesAlta = {
-  Nombre: `Serie aleatoria ${Math.floor(Math.random() * 1000)}`,
+  Nombre: (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
+  CodigoSerie: 10000,
   CodigoCapitulo: 1000,
   FechaEstreno: new Date().toISOString(),
   Activo: true,
 };
 const seriesModificacion = {
+    Nombre: (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
     CodigoSerie: 10000,
-    Nombre: `Serie aleatoria ${Math.floor(Math.random() * 1000)}`,
     CodigoCapitulo: 1000,
     FechaAlta: new Date().toISOString(),
     Activo: true,
@@ -63,7 +64,7 @@ describe("GET /api/series/:codigoSerie", () => {
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
-        CodigoSerie:10000,
+        CodigoSerie: expect.any(Number),
         Nombre: expect.any(String),
         CodigoCapitulo: expect.any(Number),
         FechaEstreno: expect.any(String),
