@@ -68,7 +68,7 @@ router.post('/api/productora/', async (req, res) => {
       Nombre: req.body.Nombre,
       Codigo: req.body.Codigo,
       CodigoProd: req.body.CodigoProd,
-      Fecha_lanzamiento: req.body.Fecha_lanzamiento,
+      Fecha_nacimiento: req.body.Fecha_nacimiento,
       Activo: req.body.Activo
     });
     res.status(200).json(data.dataValues); // devolvemos el registro agregado!
@@ -109,13 +109,13 @@ router.put('/api/productora/:codigoProd', async (req, res) => {
       where: { CodigoProd: req.params.codigoProd },
     });
     if (!item) {
-      res.status(404).json({ message: 'Artículo no encontrado' });
+      res.status(404).json({ message: 'Productora no encontrado' });
       return;
     }
     item.Nombre = req.body.Nombre;
     item.Codigo = req.body.Codigo;
     item.CodigoProd = req.body.CodigoProd;
-    item.Fecha_lanzamiento = req.body.Fecha_lanzamiento;
+    item.Fecha_nacimiento = req.body.Fecha_nacimiento;
     item.Activo = req.body.Activo;
     await item.save();
 
