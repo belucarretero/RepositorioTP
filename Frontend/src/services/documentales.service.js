@@ -1,5 +1,9 @@
 import axios from "axios";
-const urlResource = "https://labsys.frc.utn.edu.ar/dds-backend-2024/api/documentales";
+
+//const urlResource = "https://labsys.frc.utn.edu.ar/dds-express/api/articulosfamilias";
+import {config} from "../config";
+const urlResource = config.urlResourceDocumentales
+
 async function Buscar() {
   const resp = await axios.get(urlResource);
   return resp.data;

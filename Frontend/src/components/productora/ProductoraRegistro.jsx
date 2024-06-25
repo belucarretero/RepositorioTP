@@ -59,6 +59,36 @@ export default function ProductoraRegistro({
             </div>
           </div>
 
+          {/* campo Codigo */}
+          <div className="row">
+            <div className="col-sm-4 col-md-3 offset-md-1">
+              <label className="col-form-label" htmlFor="Codigo">
+                Codigo<span className="text-danger">*</span>:
+              </label>
+            </div>
+            <div className="col-sm-8 col-md-6">
+              <select
+                {...register("Codigo", {
+                  required: { value: true, message: "Codigo es requerido" },
+                })}
+                className={
+                  "form-control " +
+                  (errors?.Codigo ? "is-invalid" : "")
+                }
+              >
+                <option value="" key={1}></option>
+                {Documentales?.map((x) => (
+                  <option value={x.Codigo} key={x.Codigo}>
+                    {x.Nombre}
+                  </option>
+                ))}
+              </select>
+              <div className="invalid-feedback">
+                {errors?.Codigo?.message}
+              </div>
+            </div>
+          </div>
+
 
           {/* campo Fecha_nacimiento */}
           <div className="row">
