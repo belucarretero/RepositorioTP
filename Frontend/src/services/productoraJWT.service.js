@@ -1,12 +1,11 @@
 import {config} from "../config";
 import httpService from "./http.service";
-const urlServidor = "https://labsys.frc.utn.edu.ar/dds-backend-2024"
-const urlResourceProductora = urlServidor + "/api/productoraJWT";
+//const urlResourceProductora = urlServidor + "/api/productoraJWT";
 
 
 
 
-const urlResource = urlResourceProductora;
+const urlResource = config.urlResourceProductoraJWT;
 
 
 async function Buscar(Nombre, Activo, Pagina) {
