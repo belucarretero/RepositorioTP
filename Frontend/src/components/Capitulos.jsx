@@ -5,9 +5,9 @@ function Capitulos() {
   const [capitulos, setCapitulos] = useState(null);
   // cargar al montar el componente (solo una vez)
   useEffect(() => { // CAMBIAR NOMBRE
-    BuscarArticulosFamilias();
+    BuscarCapitulos();
   }, []);
-  async function BuscarArticulosFamilias() {
+  async function BuscarCapitulos() {
     let data = await capitulosMockService.Buscar();
     setCapitulos(data);
   };

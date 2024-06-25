@@ -42,10 +42,14 @@ httpService.interceptors.response.use(
     } else if (error.response.status === 403) {
       // no auntenticado
       error.message = "usuario no autorizado para acceder a esta funcionalidad";
+    } else if (error.response.status === 404) {
+      console.log("Error 404 detallado:", error.response);
+      error.message = "No se encontro el recurso solicitado:; " + error.response.config.url;
     } else {
       error.message =
         error?.response?.data?.message ??
         "Actualmente tenemos inconvenientes en el servidor, por favor intente más tarde";
+    
     }
     modalService.Alert(error.message);
 

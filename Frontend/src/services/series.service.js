@@ -35,5 +35,5 @@ async function Grabar(item) {
 
 
 export const seriesService = {
-  Buscar,BuscarPorId,ActivarDesactivar,Grabar
+  Buscar, BuscarPorId , ActivarDesactivar , Grabar
 };

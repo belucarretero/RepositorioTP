@@ -67,7 +67,7 @@ function Series() {
   }
 
   function Consultar(item) {
-    BuscarPorId(item, "C"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+    Buscar(item, "C"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
   }
   
   function Modificar(item) {
@@ -83,7 +83,7 @@ function Series() {
     setItem({
         CodigoSerie: 0,
         Nombre: '',
-        FechaEstreno: moment(new Date()).format("YYYY-MM-DD"),
+        FechaEstreno: moment(new Date()).format("DD/MM/YYYY"),
         Activo: true,
       });
     alert("preparando el Alta...");
