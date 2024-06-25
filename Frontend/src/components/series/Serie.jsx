@@ -45,6 +45,7 @@ function Serie() {
     modalDialogService.BloquearPantalla(true);
     const data = await seriesService.Buscar(Nombre, Activo, _pagina);
     modalDialogService.BloquearPantalla(false);
+
     setItems(data.Items);
     setRegistrosTotal(data.RegistrosTotal);
 
@@ -67,7 +68,7 @@ function Serie() {
 
   function Modificar(item) {
     if (!item.Activo) {
-      alert("No puede modificarse un registro Inactivo.");
+      modalDialogService.Alert("No puede modificarse un registro Inactivo.");
       return;
     }
     BuscarPorId(item.CodigoSerie, "M");
@@ -78,9 +79,12 @@ function Serie() {
     setItem({
       CodigoSerie: 0,
       Nombre: '',
-      FechaEstreno: moment(new Date()).format("DD/MM/YYYY"),
+      CodigoCapitulo: '',
+      FechaEstreno: moment(new Date()).format("DD-MM-YYYY"),
       Activo: true,
     });
+    alert("preparando el Alta...");
+    console.log(Item);
   }
 
   function Imprimir() {
