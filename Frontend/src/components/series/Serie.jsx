@@ -62,16 +62,16 @@ function Serie() {
     setAccionABMC(accionABMC);
   }
 
-  function Consultar(item) {
-    BuscarPorId(item.CodigoSerie, "C");
+  function Consultar(items) {
+    BuscarPorId(items.CodigoSerie, "C");
   }
 
-  function Modificar(item) {
-    if (!item.Activo) {
+  function Modificar(items) {
+    if (!items.Activo) {
       modalDialogService.Alert("No puede modificarse un registro Inactivo.");
       return;
     }
-    BuscarPorId(item.CodigoSerie, "M");
+    BuscarPorId(items.CodigoSerie, "M");
   }
 
   async function Agregar() {
@@ -80,7 +80,7 @@ function Serie() {
       CodigoSerie: 0,
       Nombre: '',
       CodigoCapitulo: '',
-      FechaEstreno: moment(new Date()).format("DD-MM-YYYY"),
+      FechaEstreno: moment(new Date()).format("YYYY-MM-DD"),
       Activo: true,
     });
     alert("preparando el Alta...");
@@ -162,6 +162,7 @@ function Serie() {
       {AccionABMC !== "L" && (
         <SeriesRegistro
           {...{
+            AccionABMC,
             Capitulos,
             Item,
             Grabar,

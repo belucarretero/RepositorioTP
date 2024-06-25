@@ -1,7 +1,7 @@
 // configurar ORM sequelize
 const { Sequelize, DataTypes } = require("sequelize");
 //const sequelize = new Sequelize("sqlite:" + process.env.base );
-const sequelize = new Sequelize("sqlite:" + "./.data/contenidos.db"); //VER QUE NOMBRE LE PONEMOS, PORQUE PYMES NO VA
+const sequelize = new Sequelize("sqlite:" + "./.data/contenido.db"); //VER QUE NOMBRE LE PONEMOS, PORQUE PYMES NO VA
 
 // definicion del modelo de datos
   
