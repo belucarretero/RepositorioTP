@@ -7,6 +7,14 @@ require('./base-orm/sqlite-init'); // crea la bases de datos sino existe
 
 app.use(express.json());
 
+// configurar servidor
+const cors = require('cors');
+app.use(
+  cors({
+    origin: 'http://localhost:5173', // origin: 'https://Grupo-3K03-08.azurewebsites.net'
+  })
+);
+
 // controlar ruta
 app.get('/', (req, res) => {
   res.send('Backend inicial dds-backend!');
@@ -57,13 +65,7 @@ app.use(seguridadRouter);
 
 ////////////////////////////////////////////////////////////////////////
 
-// configurar servidor
-const cors = require('cors');
-app.use(
-  cors({
-    origin: '*', // origin: 'https://Grupo-3K03-08.azurewebsites.net'
-  })
-);
+
 
 // levantar servidor
 if (!module.parent) {

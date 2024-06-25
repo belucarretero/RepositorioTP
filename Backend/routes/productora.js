@@ -98,7 +98,7 @@ router.put('/api/productora/:codigoProd', async (req, res) => {
     } */
 
   try {
-    let item = await db.articulos.findOne({
+    let item = await db.productora.findOne({
       attributes: [
       'CodigoProd',
       'Codigo',
@@ -164,7 +164,7 @@ router.delete('/api/productora/:codigoProd', async (req, res) => {
     // baja lógica
     try {
       let data = await db.sequelize.query(
-        'UPDATE productora SET Activo = case when Activo = 1 then 0 else 1 end WHERE CodigoProd = :CodigoProd',
+        'UPDATE productoras SET Activo = case when Activo = 1 then 0 else 1 end WHERE CodigoProd = :CodigoProd',
         {
           replacements: { CodigoProd: +req.params.codigoProd },
         }
