@@ -83,7 +83,6 @@ function Series() {
     setItem({
         CodigoSerie: 0,
         Nombre: '',
-        CodigoCapitulo: '',
         FechaEstreno: moment(new Date()).format("YYYY-MM-DD"),
         Activo: true,
       });
@@ -146,7 +145,8 @@ function Series() {
         Series <small>{TituloAccionABMC[AccionABMC]}</small>
       </div>
 
-      { AccionABMC === "L" && <SeriesBuscar
+      { AccionABMC === "L" && (
+       <SeriesBuscar
         Nombre={Nombre}
         setNombre={setNombre}
         Activo={Activo}
@@ -154,10 +154,11 @@ function Series() {
         Buscar={Buscar}
         Agregar={Agregar}
         />
-      }
+      )}
 
       {/* Tabla de resutados de busqueda y Paginador */}
-      {AccionABMC === "L" && Items?.length > 0 && <SeriesListado
+      {AccionABMC === "L" && Items?.length > 0 && (
+        <SeriesListado
         {...{
           Items,
           Consultar,
@@ -170,23 +171,23 @@ function Series() {
           Buscar,
         }}
         />
-      }
+      )}
 
-        {AccionABMC === "L" && Items?.length === 0 &&  
-          <div className="alert alert-info mensajesAlert">
-            <i className="fa fa-exclamation-sign"></i>
-            No se encontraron registros...
-          </div>
-        }
+      {AccionABMC === "L" && Items?.length === 0 && (
+        <div className="alert alert-info mensajesAlert">
+          <i className="fa fa-exclamation-sign"></i>
+          No se encontraron registros...
+        </div>
+      )}
 
       {/* Formulario de alta/modificacion/consulta */}
-      {AccionABMC !== "L" && 
+      {AccionABMC !== "L" && (
         <SeriesRegistro
           {...{ AccionABMC, Capitulos, Item, Grabar, Volver }}
         />
-      }
+      )}
     </div>
-
   );
 }
-export { Series }; //Series completo
+export { Series }; //Revisado
+

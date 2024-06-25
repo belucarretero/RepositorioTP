@@ -5,9 +5,9 @@ function Capitulos() {
   const [capitulos, setCapitulos] = useState(null);
   // cargar al montar el componente (solo una vez)
   useEffect(() => { // CAMBIAR NOMBRE
-    BuscarCapitulos();
+    BuscarArticulosFamilias();
   }, []);
-  async function BuscarCapitulos() {
+  async function BuscarArticulosFamilias() {
     let data = await capitulosMockService.Buscar();
     setCapitulos(data);
   };
@@ -23,10 +23,10 @@ function Capitulos() {
         </thead>
         <tbody>
           {capitulos &&
-            capitulos.map((capitulo) => (
-              <tr key={capitulo.CodigoCapitulo}>
-                <td>{capitulo.CodigoCapitulo}</td>
-                <td>{capitulo.Nombre}</td>
+            capitulos.map((capitulos) => (
+              <tr key={capitulos.CodigoCapitulo}>
+                <td>{capitulos.CodigoCapitulo}</td>
+                <td>{capitulos.Nombre}</td>
               </tr>
             ))}
         </tbody>
@@ -37,4 +37,4 @@ function Capitulos() {
 }
 
 
-export {Capitulos};
+export {Capitulos}; //CONTROLADO
