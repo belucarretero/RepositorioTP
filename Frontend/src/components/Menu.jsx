@@ -83,6 +83,11 @@ function Menu() {
                 Series JWT
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" title="exclusivo para administradores" to="/peliculasjwt">
+                Peliculas JWT
+              </NavLink>
+            </li>
             <li className="nav-item dropdown bg-dark">
               <a
                 className="nav-link dropdown-toggle"

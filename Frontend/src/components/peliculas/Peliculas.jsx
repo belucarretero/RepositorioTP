@@ -150,7 +150,7 @@ function Peliculas() {
       </div>
 
       {AccionABMC === "L" && (
-        <ArticulosBuscar
+        <PeliculasBuscar
           Nombre={Nombre}
           setNombre={setNombre}
           Activo={Activo}
@@ -162,7 +162,7 @@ function Peliculas() {
 
       {/* Tabla de resutados de busqueda y Paginador */}
       {AccionABMC === "L" && Items?.length > 0 && (
-        <ArticulosListado
+        <PeliculasListado
           {...{
             Items,
             Consultar,
@@ -186,7 +186,7 @@ function Peliculas() {
 
       {/* Formulario de alta/modificacion/consulta */}
       {AccionABMC !== "L" && (
-        <ArticulosRegistro
+        <PeliculasRegistro
           {...{ AccionABMC, Actores, Item, Grabar, Volver }}
         />
       )}

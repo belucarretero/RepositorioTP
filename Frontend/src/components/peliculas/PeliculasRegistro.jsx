@@ -60,35 +60,7 @@ export default function PeliculasRegistro({
 
           
 
-          {/* campo CodigoAct */}
-          <div className="row">
-            <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="CodigoAct">
-                Actor<span className="text-danger">*</span>:
-              </label>
-            </div>
-            <div className="col-sm-8 col-md-6">
-              <select
-                {...register("CodigoAct", {
-                  required: { value: true, message: "Actor es requerido" },
-                })}
-                className={
-                  "form-control " +
-                  (errors?.CodigoAct ? "is-invalid" : "")
-                }
-              >
-                <option value="" key={1}></option>
-                {Actores?.map((x) => (
-                  <option value={x.CodigoAct} key={x.CodigoAct}>
-                    {x.Nombre}
-                  </option>
-                ))}
-              </select>
-              <div className="invalid-feedback">
-                {errors?.CodigoAct?.message}
-              </div>
-            </div>
-          </div>
+          
 
           {/* campo Fecha_lanzamiento */}
           <div className="row">

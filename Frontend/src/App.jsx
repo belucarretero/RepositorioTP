@@ -11,6 +11,7 @@ import { Productora } from "./components/productora/Productora";
 import { Series } from "./components/series/Series";
 import { Actores } from "./components/Actores";
 import { Peliculas } from "./components/peliculas/Peliculas";
+import { PeliculasJWT } from "./components/peliculasJWT/PeliculasJWT";
 import { ProductoraJWT } from "./components/productoraJWT/ProductoraJWT";
 import { SeriesJWT } from "./components/seriesJWT/SeriesJWT";
 import {RequireAuth} from "./components/RequiereAuth" ;
@@ -43,6 +44,14 @@ function App() {
                 element={
                   <RequireAuth>
                     <SeriesJWT />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/peliculasjwt"
+                element={
+                  <RequireAuth>
+                    <PeliculasJWT />
                   </RequireAuth>
                 }
               />

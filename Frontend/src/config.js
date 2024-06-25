@@ -13,15 +13,18 @@ const urlServidor = "http://localhost:5173"
 
 
 
-
 const urlResourceProductora = urlServidor + "/api/productora";
 const urlResourceDocumentales = urlServidor + "/api/documentales";
 const urlResourceProductoraJWT = urlServidor + "/api/ProductoraJWT";
 const urlResourceCapitulos = urlServidor + "/api/capitulos";
 const urlResourceSeries = urlServidor + "/api/series";
-const urlResourceSeriesJWT = urlServidor + "/api/SeriesJWT";
+const urlResourceSeriesJWT = urlServidor + "/api/SeriesJWT"
+const urlResourcePeliculas = urlServidor + "/api/peliculas"
+const urlResourcePeliculasJWT = urlServidor + "/api/PeliculasJWT"
+const urlResourceActores = urlServidor + "/api/actores"
+;
 
-
+//Agregar peliculasJWT
 
 export const config = {
     urlServidor,
@@ -31,6 +34,9 @@ export const config = {
     urlResourceCapitulos,
     urlResourceSeries,
     urlResourceSeriesJWT,
+    urlResourcePeliculas,
+    urlResourcePeliculasJWT,
+    urlResourceActores
 }
 
 
