@@ -139,7 +139,7 @@ const series = sequelize.define(
       },
     },
     FechaEstreno: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
