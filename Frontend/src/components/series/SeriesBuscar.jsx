@@ -3,10 +3,10 @@ export default function SeriesBuscar ({Nombre, setNombre, Activo, setActivo, Bus
 
     return (
     <form>
-      <div className="container-fluid">
-        <div className="row">
+      <div className="container-fluid bg-light p-3 rounded">
+        <div className="row mb-3">
           <div className="col-sm-4 col-md-2">
-            <label className="col-form-label">Nombre:</label>
+            <label className="col-form-label fw-bold">Nombre:</label>
           </div>
           <div className="col-sm-8 col-md-4">
             <input
@@ -19,7 +19,7 @@ export default function SeriesBuscar ({Nombre, setNombre, Activo, setActivo, Bus
             />
           </div>
           <div className="col-sm-4 col-md-2">
-            <label className="col-form-label">Activo:</label>
+            <label className="col-form-label fw-bold">Activo:</label>
           </div>
           <div className="col-sm-8 col-md-4">
             <select
