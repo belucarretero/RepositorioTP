@@ -7,11 +7,11 @@ describe('Ejemplo simple, test que no falla', () => {
   });
 });
 
-describe('GET Hola mundo!', () => {
+describe('GET Backend inicial dds-backend!', () => {
   it('Debería devolver Hola mundo!', async () => {
     const res = await request(app).get('/');
     expect(res.statusCode).toEqual(200);
-    expect(res.text).toEqual('Hola mundo!');
+    expect(res.text).toEqual('Backend inicial dds-backend!');
   });
 });
 
