@@ -77,7 +77,7 @@ function Serie() {
   async function Agregar() {
     setAccionABMC("A");
     setItem({
-      CodigoSerie: 0,
+      CodigoSerie: Date.now(), // ID TEMPORAL
       Nombre: '',
       CodigoCapitulo: '',
       FechaEstreno: moment(new Date()).format("YYYY-MM-DD"),

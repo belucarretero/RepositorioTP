@@ -22,10 +22,14 @@ async function ActivarDesactivar(item) {
 }
 
 async function Grabar(item) {
-  if (item.CodigoSerie === 0) {
-    await httpService.post(urlResource, item);
+  if (!item.CodigoSerie || item.CodigoSerie === 0 || item.CodigoSerie > Date.now() - 10000000000) {
+    // Si es una nueva serie o tiene un CodigoSerie temporal
+    delete item.CodigoSerie; // Eliminamos el CodigoSerie temporal
+    const resp = await httpService.post(urlResource, item);
+    return resp.data; // Devolvemos la respuesta del servidor que debería incluir el nuevo CodigoSerie
   } else {
-    await httpService.put(urlResource + "/" + item.CodigoSerie, item);
+    // Si es una serie existente
+    await httpService.put(`${urlResource}/${item.CodigoSerie}`, item);
   }
 }
 
