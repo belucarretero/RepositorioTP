@@ -58,4 +58,4 @@ export default function SeriesBuscar ({Nombre, setNombre, Activo, setActivo, Bus
       </div>
     </form>
     )
-  }; //SeriesBuscarListo
+  }; 

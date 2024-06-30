@@ -5,10 +5,7 @@ const { Op, ValidationError } = require('sequelize');
 const auth = require('../seguridad/auth');
 
 router.get('/api/serie', async function (req, res, next) {
-  // #swagger.tags = ['Articulos']
-  // #swagger.summary = 'obtiene todos los Articulos'
-  // consulta de artículos con filtros y paginacion
-
+  
   let where = {};
   if (req.query.Nombre != undefined && req.query.Nombre !== '') {
     where.Nombre = {
@@ -40,9 +37,6 @@ router.get('/api/serie', async function (req, res, next) {
 
 router.get('/api/serie/:codigoSerie', async function (req, res, next) { 
     console.log(req.params.nombre);
-  // #swagger.tags = ['Productora']
-  // #swagger.summary = 'obtiene un Articulo'
-  // #swagger.parameters['codigoProd'] = { description: 'identificador del Articulo...' }
   let items = await db.series.findOne({
     attributes: [
       'CodigoSerie',
@@ -57,13 +51,6 @@ router.get('/api/serie/:codigoSerie', async function (req, res, next) {
 });
 
 router.post('/api/serie/', async (req, res) => {
-  // #swagger.tags = ['Series']
-  // #swagger.summary = 'Agrega una serie'
-  /*    #swagger.parameters['item'] = {
-                in: 'body',
-                description: 'nueva serie',
-                schema: { $ref: '#/definitions/Series' }
-    } */
 
   try {
     let data = await db.series.create({
@@ -73,7 +60,7 @@ router.post('/api/serie/', async (req, res) => {
       CodigoCapitulo: req.body.CodigoCapitulo,
       Activo: req.body.Activo
     });
-    res.status(200).json(data.dataValues); // devolvemos el registro agregado!
+    res.status(200).json(data.dataValues); // Devolvemos el registro agregado!
   } catch (err) {
     if (err instanceof ValidationError) {
       // si son errores de validación, los devolvemos
@@ -90,14 +77,6 @@ router.post('/api/serie/', async (req, res) => {
 });
 
 router.put('/api/serie/:codigoSerie', async (req, res) => {
-  // #swagger.tags = ['Series']
-  // #swagger.summary = 'actualiza una serie'
-  // #swagger.parameters['codigoCapitulo'] = { description: 'identificador de la serie...' }
-  /*    #swagger.parameters['Series'] = {
-                in: 'body',
-                description: 'Series a actualizar',
-                schema: { $ref: '#/definitions/Series' }
-    } */
 
   try {
     let item = await db.series.findOne({
@@ -200,6 +179,7 @@ router.get(
       'CodigoCapitulo',
       'Activo',
       ],
+      // Ordenar según Código de Serie
       order: [['CodigoSerie', 'ASC']],
     });
     res.json(items);

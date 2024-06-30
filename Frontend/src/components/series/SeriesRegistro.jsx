@@ -23,7 +23,7 @@ export default function SeriesRegistro({
       <div className="container-fluid">
         <fieldset disabled={AccionABMC === "C"}>
 
-          {/* campo nombre */}
+          {/* Campo nombre con formato específico */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="Nombre">
@@ -57,7 +57,7 @@ export default function SeriesRegistro({
             </div>
           </div>
 
-          {/* campo CodigoCapitulo */}
+          {/* Campo CodigoCapitulo con formato específico*/}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="CodigoCapitulo">
@@ -87,7 +87,7 @@ export default function SeriesRegistro({
             </div>
           </div>
 
-          {/* campo FechaEstreno */}
+          {/* Campo FechaEstreno con formato específico*/}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="FechaEstreno">
@@ -110,7 +110,7 @@ export default function SeriesRegistro({
             </div>
           </div>
 
-          {/* campo Activo */}
+          {/* Campo Activo */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="Activo">

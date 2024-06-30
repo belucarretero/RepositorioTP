@@ -21,7 +21,7 @@ function Serie() {
   const [Activo, setActivo] = useState("");
 
   const [Items, setItems] = useState(null);
-  const [Item, setItem] = useState(null); // usado en BuscarporId (Modificar, Consultar)
+  const [Item, setItem] = useState(null); // Usado en BuscarporId (Modificar, Consultar)
   const [RegistrosTotal, setRegistrosTotal] = useState(0);
   const [Pagina, setPagina] = useState(1);
   const [Paginas, setPaginas] = useState([]);
@@ -36,6 +36,7 @@ function Serie() {
     BuscarCapitulos();
   }, []);
 
+  // Función que se ejecuta cuando cambia el estado de Pagina
   async function Buscar(_pagina) {
     if (_pagina && _pagina !== Pagina) {
       setPagina(_pagina);
@@ -56,28 +57,31 @@ function Serie() {
     setPaginas(arrPaginas);
   }
 
+  // Función para buscar por Id (Útil en consultar y modificar)
   async function BuscarPorId(item, accionABMC) {
     const data = await seriesService.BuscarPorId(item);
     setItem(data);
     setAccionABMC(accionABMC);
   }
 
-  function Consultar(items) {
-    BuscarPorId(items.CodigoSerie, "C");
+  // Funciones para el CRUD, Consultar --> Aplica BuscarPorId y setAccionABMC("C")
+  function Consultar(item) {
+    BuscarPorId(item, "C");
   }
-
-  function Modificar(items) {
-    if (!items.Activo) {
-      modalDialogService.Alert("No puede modificarse un registro Inactivo.");
+  // Modificar --> Aplica BuscarPorId y setAccionABMC("M")
+  function Modificar(item) {
+    if (!item.Activo) {
+      modalDialogService.Alert("No puede modificarse un registro Inactivo."); // Si está inactivo no se puede modificar
       return;
     }
-    BuscarPorId(items.CodigoSerie, "M");
+    BuscarPorId(item, "M");
   }
 
+  // Agregar --> Setea Item con valores iniciales y setAccionABMC("A")
   async function Agregar() {
     setAccionABMC("A");
     setItem({
-      CodigoSerie: Date.now(), // ID TEMPORAL
+      CodigoSerie: 0, // ID TEMPORAL
       Nombre: '',
       CodigoCapitulo: '',
       FechaEstreno: moment(new Date()).format("YYYY-MM-DD"),
@@ -91,6 +95,7 @@ function Serie() {
     alert("En desarrollo...");
   }
 
+  // Activar/Desactivar --> Setea el registro Activo = !Activo y luego se graba
   async function ActivarDesactivar(item) {
     modalDialogService.Confirm(
       "Esta seguro que quiere " +
@@ -105,7 +110,7 @@ function Serie() {
       }
     );
   }
-
+  // Función para grabar el registro
   async function Grabar(item) {
     try {
       await seriesService.Grabar(item);

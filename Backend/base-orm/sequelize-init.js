@@ -1,9 +1,9 @@
-// configurar ORM sequelize
+// Configurar ORM sequelize
 const { Sequelize, DataTypes } = require("sequelize");
 //const sequelize = new Sequelize("sqlite:" + process.env.base );
-const sequelize = new Sequelize("sqlite:" + "./.data/contenido.db"); //VER QUE NOMBRE LE PONEMOS, PORQUE PYMES NO VA
+const sequelize = new Sequelize("sqlite:" + "./.data/contenido.db"); 
 
-// definicion del modelo de datos
+// Definicion del modelo de datos
   
 const documentales = sequelize.define(
   "documentales",
@@ -116,6 +116,7 @@ const productora = sequelize.define(
   },
 );
 
+// Definiendo el modelo de la tabla series (Tabla principal)
 const series = sequelize.define(
   "series",
   {
@@ -170,11 +171,20 @@ const series = sequelize.define(
     },
   },
   {
+    // Pasar a mayúsculas solo la primera letra del nombre
+    hooks: {
+      beforeValidate: function (serie, options) {
+        if (typeof serie.Nombre === "string") {
+          serie.Nombre = serie.Nombre.charAt(0).toUpperCase() + serie.Nombre.slice(1).toLowerCase().trim();
+        }
+      },
+    },
+
     timestamps: false,
-    tableName: 'series'
   }
 );
 
+// Definiendo el modelo de la tabla capitulos (Tabla secundaria)
 const capitulos = sequelize.define(
   "capitulos",
   {
