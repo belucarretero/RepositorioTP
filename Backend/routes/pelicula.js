@@ -4,7 +4,7 @@ const db = require('../base-orm/sequelize-init');
 const { Op, ValidationError } = require('sequelize');
 const auth = require('../seguridad/auth');
 
-router.get('/api/peliculas', async function (req, res, next) {
+router.get('/api/pelicula', async function (req, res, next) {
   // #swagger.tags = ['Peliculas']
   // #swagger.summary = 'obtiene todos las Peliculas'
   // consulta de Peliculas con filtros y paginacion
@@ -22,7 +22,7 @@ router.get('/api/peliculas', async function (req, res, next) {
   }
   const Pagina = req.query.Pagina ?? 1;
   const TamañoPagina = 10;
-  const { count, rows } = await db.peliculas.findAndCountAll({
+  const { count, rows } = await db.pelicula.findAndCountAll({
     attributes: [
       'CodigoPel',
       'Nombre',
@@ -38,11 +38,11 @@ router.get('/api/peliculas', async function (req, res, next) {
   return res.json({ Items: rows, RegistrosTotal: count });
 });
 
-router.get('/api/peliculas/:CodigoPel', async function (req, res, next) {
-  // #swagger.tags = ['Peliculas']
+router.get('/api/pelicula/:CodigoPel', async function (req, res, next) {
+  // #swagger.tags = ['Pelicula]
   // #swagger.summary = 'obtiene una Pelicula'
   // #swagger.parameters['CodigoPel'] = { description: 'identificador de la Pelicula...' }
-  let items = await db.Peliculas.findOne({
+  let items = await db.pelicula.findOne({
     attributes: [
       'CodigoPel',
       'Nombre',
@@ -55,7 +55,7 @@ router.get('/api/peliculas/:CodigoPel', async function (req, res, next) {
   res.json(items);
 });
 
-router.post('/api/peliculas/', async (req, res) => {
+router.post('/api/pelicula/', async (req, res) => {
   // #swagger.tags = ['Peliculas']
   // #swagger.summary = 'agrega una Pelicula
   /*    #swagger.parameters['item'] = {
@@ -64,7 +64,7 @@ router.post('/api/peliculas/', async (req, res) => {
                 schema: { $ref: '#/definitions/Peliculas' }
     } */
   try {
-    let data = await db.peliculas.create({
+    let data = await db.pelicula.create({
       Nombre: req.body.Nombre,
       Fecha_lanzamiento: req.body.Fecha_lanzamiento,
       CodigoAct: req.body.CodigoAct,
@@ -86,16 +86,7 @@ router.post('/api/peliculas/', async (req, res) => {
   }
 });
 
-router.put('/api/peliculas/:CodigoPel', async (req, res) => {
-  // #swagger.tags = ['Peliculas']
-  // #swagger.summary = 'actualiza una Pelicula '
-  // #swagger.parameters['CodigoPel'] = { description: 'identificador de la Pelicula ...' }
-  /*    #swagger.parameters['Pelicula'] = {
-                in: 'body',
-                description: 'Pelicula a actualizar',
-                schema: { $ref: '#/definitions/Peliculas' }
-    } */
-
+router.put('/api/pelicula/:CodigoPel', async (req, res) => {
   try {
     let item = await db.peliculas.findOne({
       attributes: [
@@ -132,7 +123,7 @@ router.put('/api/peliculas/:CodigoPel', async (req, res) => {
   }
 });
 
-router.delete('/api/peliculas/:CodigoPel', async (req, res) => {
+router.delete('/api/pelicula/:CodigoPel', async (req, res) => {
   // #swagger.tags = ['peliculas']
   // #swagger.summary = 'elimina un pelicula'
   // #swagger.parameters['CodigoPel'] = { description: 'identificador de la pelicula..' }
@@ -141,7 +132,7 @@ router.delete('/api/peliculas/:CodigoPel', async (req, res) => {
 
   if (bajaFisica) {
     // baja fisica
-    let filasBorradas = await db.peliculas.destroy({
+    let filasBorradas = await db.pelicula.destroy({
       where: { CodigoPel: req.params.CodigoPel },
     });
     if (filasBorradas == 1) res.sendStatus(200);
@@ -180,14 +171,14 @@ router.get(
                  "bearerAuth1": []
           }] */
 
-    // #swagger.tags = ['Peliculas']
+    // #swagger.tags = ['Pelicula']
     // #swagger.summary = 'obtiene todos las Peliculas, con seguridad JWT, solo para rol: admin (usuario:admin, clave:123)'
     const { rol } = res.locals.user;
     if (rol !== 'admin') {
       return res.status(403).json({ message: 'usuario no autorizado!' });
     }
 
-    let items = await db.peliculas.findAll({
+    let items = await db.pelicula.findAll({
       attributes: [
         'CodigoPel',
         'Nombre',

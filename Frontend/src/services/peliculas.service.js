@@ -1,6 +1,6 @@
 
 import httpService from "./http.service";
-//const urlResource = "https://labsys.frc.utn.edu.ar/dds-express/api/peliculas";
+//const urlResource = "https://labsys.frc.utn.edu.ar/dds-express/api/pelicula";
 
 // mas adelante podemos usar un archivo de configuracion para el urlResource
  import {config} from "../config";

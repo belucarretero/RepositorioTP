@@ -10,7 +10,7 @@ import modalDialogService from "../../services/modalDialog.service";
 
 
 
-function Peliculas() {
+function Pelicula() {
   const TituloAccionABMC = {
     A: "(Agregar)",
     B: "(Eliminar)",
@@ -193,4 +193,4 @@ function Peliculas() {
     </div>
   );
 }
-export { Peliculas };
+export { Pelicula };

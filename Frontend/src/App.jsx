@@ -10,7 +10,7 @@ import { Footer } from "./components/Footer";
 import { Productora } from "./components/productora/Productora";
 import { Serie } from "./components/series/Serie";
 import { Actores } from "./components/Actores";
-import { Peliculas } from "./components/peliculas/Peliculas";
+import { Pelicula } from "./components/peliculas/Pelicula";
 import { PeliculasJWT } from "./components/peliculasJWT/PeliculasJWT";
 import { ProductoraJWT } from "./components/productoraJWT/ProductoraJWT";
 import { SeriesJWT } from "./components/seriesJWT/SeriesJWT";
@@ -56,11 +56,9 @@ function App() {
                 }
               />
               <Route path="/login/:componentFrom" element={<Login />} />
-              <Route path="*" element={<Navigate to="/inicio" replace />} />
-
               <Route path="/serie" element={<Serie/>} />
               <Route path="/actores" element={<Actores />} />
-              <Route path="/peliculas" element={<Peliculas />} />
+              <Route path="/pelicula" element={<Pelicula />} />
             </Routes>
         </div>
         <Footer />

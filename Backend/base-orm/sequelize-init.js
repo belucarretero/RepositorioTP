@@ -209,7 +209,7 @@ const capitulos = sequelize.define(
 );
 
 
-const peliculas = sequelize.define(
+const pelicula = sequelize.define(
   "peliculas",
   {
     CodigoPel: {
@@ -326,6 +326,6 @@ module.exports = {
     documentales,
     series,
     capitulos,
-    peliculas,
+    pelicula,
     actores,
   };

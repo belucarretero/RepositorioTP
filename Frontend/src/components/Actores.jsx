@@ -4,10 +4,10 @@ function Actores() {
   const tituloPagina = 'Actores';
   const [actores, setActores] = useState(null);
   // cargar al montar el componente (solo una vez)
-  useEffect(() => { // CAMBIAR NOMBRE
-    BuscarArticulosFamilas();
+  useEffect(() => { 
+    BuscarActores();
   }, []);
-  async function BuscarArticulosFamilas() {
+  async function BuscarActores() {
     let data = await actoresMockService.Buscar();
     setActores(data);
   };

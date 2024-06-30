@@ -14,10 +14,10 @@ const peliculaModificacion = {
   Activo: true,
 };
 
-// test route/peliculas GET
-describe("GET /api/peliculas", () => {
+// test route/pelicula GET
+describe("GET /api/pelicula", () => {
   it("Deberia devolver todas las peliculas", async () => {
-    const res = await request(app).get("/api/apeliculas");
+    const res = await request(app).get("/api/apelicula");
     expect(res.statusCode).toEqual(200);
 
     expect(res.body).toEqual(
@@ -36,10 +36,10 @@ describe("GET /api/peliculas", () => {
   });
 });
 
-// test route/peliculas GET
-describe("GET /api/peliculas con filtros", () => {
+// test route/pelicula GET
+describe("GET /api/pelicula con filtros", () => {
   it("Deberia devolver las peliculas según filtro ", async () => {
-    const res = await request(app).get("/api/peliculas?Nombre=Titanic&Activo=true&Pagina=1");
+    const res = await request(app).get("/api/pelicula?Nombre=Titanic&Activo=true&Pagina=1");
     expect(res.statusCode).toEqual(200);
 
     expect(verificarPropiedades(res.body.Items) ).toEqual(true );
@@ -56,10 +56,10 @@ describe("GET /api/peliculas con filtros", () => {
   });
 });
 
-// test route/peliculas/:CodigoPel GET
-describe("GET /api/peliculas/:CodigoPel", () => {
+// test route/pelicula/:CodigoPel GET
+describe("GET /api/pelicula/:CodigoPel", () => {
   it("Deberia devolver la pelicula con el id 98769 ", async () => {
-    const res = await request(app).get("/api/peliculas/98769");
+    const res = await request(app).get("/api/pelicula/98769");
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
@@ -73,10 +73,10 @@ describe("GET /api/peliculas/:CodigoPel", () => {
   });
 });
 
-// test route/peliculas POST
-describe("POST /api/peliculas", () => {
+// test route/pelicula POST
+describe("POST /api/pelicula", () => {
   it("Deberia devolver la pelicula que acabo de crear", async () => {
-    const res = await request(app).post("/api/peliculas").send(peliculaAlta);
+    const res = await request(app).post("/api/pelicula").send(peliculaAlta);
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
@@ -90,20 +90,20 @@ describe("POST /api/peliculas", () => {
   });
 });
 
-// test route/peliculas/:CodigoPel PUT
-describe("PUT /api/peliculas/:CodigoPel", () => {
+// test route/pelicula/:CodigoPel PUT
+describe("PUT /api/pelicula/:CodigoPel", () => {
   it("Deberia devolver la pelicula con el id 98769 modificado", async () => {
     const res = await request(app)
-      .put("/api/peliculas/98769")
+      .put("/api/pelicula/98769")
       .send(peliculaModificacion);
     expect(res.statusCode).toEqual(204);
   });
 });
 
-// test route/peliculas/:CodigoPel DELETE
-describe("DELETE /api/peliculas/:CodigoPel", () => {
+// test route/pelicula/:CodigoPel DELETE
+describe("DELETE /api/pelicula/:CodigoPel", () => {
   it("Debería devolver la pelicula con el id 98769 borrado", async () => {
-    const res = await request(app).delete("/api/peliculas/98769");
+    const res = await request(app).delete("/api/pelicula/98769");
     expect(res.statusCode).toEqual(200);
 
     // baja lógica, no se borra realmente
