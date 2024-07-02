@@ -329,6 +329,8 @@ const actores = sequelize.define(
 }
 );
 
+//capitulos.belongsTo(series, { foreignKey: "CodigoSerie" });
+//actores.belongsTo(pelicula, { foreignKey: "CodigoPel" });
 
 module.exports = {
     sequelize,

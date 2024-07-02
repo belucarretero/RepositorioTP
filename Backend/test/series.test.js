@@ -1,4 +1,4 @@
-const request = require("supertest");
+const request = require("supertest"); // Dos tipoe de pruebas: funcionales (Evalua cada carac de app para ver si funciona) y no funcionales (Evalua el rendimiento de la app en diferentes situaciones)
 const app = require("../index");
 const seriesAlta = {
   Nombre: (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio

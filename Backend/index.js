@@ -7,7 +7,7 @@ require('./base-orm/sqlite-init'); // crea la bases de datos sino existe
 
 app.use(express.json());
 
-// configurar servidor
+// configurar servidor--> Permite que el servidor acepte peticiones de cualquier origen (CORS)
 const cors = require('cors');
 app.use(
   cors({

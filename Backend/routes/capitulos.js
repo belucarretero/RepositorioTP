@@ -3,9 +3,10 @@ const router = express.Router();
 
 const db = require("../base-orm/sequelize-init");
 
-router.get("/api/capitulos/", async function (req, res, next) {
+router.get("/api/capitulos", async function (req, res, next) {
   let data = await db.capitulos.findAll({
     attributes: ["CodigoCapitulo", "Nombre"],
+    //include: { model: db.series, attributes: ["CodigoSerie", "Nombre"] }, 
   });
   res.json(data);
 });

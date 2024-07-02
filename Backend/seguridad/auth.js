@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const accessTokenSecret = "youraccesstokensecret";
 const refreshTokenSecret = "yourrefreshtokensecrethere";
 
+// JWT para autenticar
 const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
 

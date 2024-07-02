@@ -15,8 +15,6 @@ function RequireAuth({ children }) {
   }
 
 
-
-
   // un nivel mas de seguridad seria verificar la autorizacion...
   return children;
 }

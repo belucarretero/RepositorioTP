@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { seriesJWTService } from "../../services/seriesJWT.service";
 
-
-
 function SeriesJWT() {
   const tituloPagina = "Series JWT (solo para administradores)";
   const [series, setseries] = useState(null);
@@ -22,8 +20,6 @@ function SeriesJWT() {
       console.log("error al buscar datos en el servidor!")
     }
   }
-
-
 
 
   return (

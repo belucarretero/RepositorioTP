@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import modalDialogService from "../services/modalDialog.service";
 
-
+// Agrega estado a componentes funcionales
 function ModalDialog() {
   const [mensaje, setMensaje] = useState("");
   const [titulo, setTitulo] = useState("");

@@ -4,7 +4,7 @@ const urlServidor = "https://labsys.frc.utn.edu.ar/dds-backend-2024"
 const urlResourceSeries = urlServidor + "/api/seriesJWT";
 
 
-const urlResource = urlResourceSeries;
+const urlResource = config.urlResourceSeriesJWT;
 
 async function Buscar(Nombre, Activo, Pagina) {
   const resp = await httpService.get(urlResource, {

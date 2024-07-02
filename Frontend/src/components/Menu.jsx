@@ -12,7 +12,7 @@ function Menu() {
     }
   
   
-    useEffect(() => {
+    useEffect(() => { // Efectos secundarios (Por ejemplo solicitudes de apis)
       AuthService.subscribeUsuarioLogueado(CambioUsuarioLogueado);
       return () => {
         AuthService.subscribeUsuarioLogueado(null);

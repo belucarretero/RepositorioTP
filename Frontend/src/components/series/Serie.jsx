@@ -7,6 +7,7 @@ import { seriesService } from "../../services/series.service";
 import { capitulosService } from "../../services/capitulos.service";
 import modalDialogService from "../../services/modalDialog.service";
 
+// Hooks agregan caracteristicas a los componentes funcionales
 function Serie() {
   const TituloAccionABMC = {
     A: "(Agregar)",
@@ -20,7 +21,7 @@ function Serie() {
   const [Nombre, setNombre] = useState("");
   const [Activo, setActivo] = useState("");
 
-  const [Items, setItems] = useState(null);
+  const [Items, setItems] = useState(null); // Use state agrega estado a nuestros componentes funcionales
   const [Item, setItem] = useState(null); // Usado en BuscarporId (Modificar, Consultar)
   const [RegistrosTotal, setRegistrosTotal] = useState(0);
   const [Pagina, setPagina] = useState(1);
@@ -28,7 +29,7 @@ function Serie() {
 
   const [Capitulos, setCapitulos] = useState(null);
 
-  useEffect(() => {
+  useEffect(() => { // Efectos secundarios
     async function BuscarCapitulos() {
       let data = await capitulosService.Buscar();
       setCapitulos(data);
