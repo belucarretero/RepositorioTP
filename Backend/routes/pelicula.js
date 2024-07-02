@@ -88,7 +88,7 @@ router.post('/api/pelicula/', async (req, res) => {
 
 router.put('/api/pelicula/:CodigoPel', async (req, res) => {
   try {
-    let item = await db.peliculas.findOne({
+    let item = await db.pelicula.findOne({
       attributes: [
         'CodigoPel',
         'Nombre',

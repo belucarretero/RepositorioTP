@@ -10,14 +10,14 @@ const peliculaModificacion = {
   CodigoPel: 98769,
   Nombre: "Pelicula " + (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
   CodigoAct: 54329,
-  FechaAlta: new Date().toISOString(),
+  Fecha_lanzamiento: new Date().toISOString(),
   Activo: true,
 };
 
 // test route/pelicula GET
 describe("GET /api/pelicula", () => {
   it("Deberia devolver todas las peliculas", async () => {
-    const res = await request(app).get("/api/apelicula");
+    const res = await request(app).get("/api/pelicula");
     expect(res.statusCode).toEqual(200);
 
     expect(res.body).toEqual(
