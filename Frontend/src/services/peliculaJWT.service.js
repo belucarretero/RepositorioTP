@@ -1,10 +1,10 @@
 import {config} from "../config";
 import httpService from "./http.service";
-const urlServidor = "https://labsys.frc.utn.edu.ar/dds-backend-2024"
-const urlResourcePeliculas = urlServidor + "/api/peliculasJWT";
+
+//const urlResourcePeliculas = urlServidor + "/api/peliculasJWT";
 
 
-const urlResource = urlResourcePeliculas;
+const urlResource = config.urlResourcePeliculaJWT;
 
 async function Buscar(Nombre, Activo, Pagina) {
   const resp = await httpService.get(urlResource, {
@@ -34,6 +34,6 @@ async function Grabar(item) {
 }
 
 
-export const peliculasJWTService = {
+export const peliculaJWTService = {
   Buscar,BuscarPorId,ActivarDesactivar,Grabar
 };

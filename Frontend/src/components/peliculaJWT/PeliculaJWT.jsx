@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { peliculasJWTService } from "../../services/peliculasJWT.service";
+import { peliculaJWTService } from "../../services/peliculaJWT.service";
 
 
 
-function PeliculasJWT() {
+function PeliculaJWT() {
   const tituloPagina = "Peliculas JWT (solo para administradores)";
-  const [series, setpeliculas] = useState(null);
+  const [peliculas, setpeliculas] = useState(null);
 
 
   // cargar al iniciar el componente, solo una vez
   useEffect(() => {
-    BuscarPeliculasJWT();
+    BuscarPeliculaJWT();
   }, []);
 
 
-  async function BuscarPeliculasJWT() {
+  async function BuscarPeliculaJWT() {
      try {
-      let data = await peliculasJWTService.Buscar();
+      let data = await peliculaJWTService.Buscar();
       setpeliculas(data);
     } catch (error) {
       console.log("error al buscar datos en el servidor!")
@@ -51,5 +51,5 @@ function PeliculasJWT() {
     </>
   );
 }
-PeliculasJWT.NombreComponenteNoOfuscado = "PeliculasJWT";
-export { PeliculasJWT };
+PeliculaJWT.NombreComponenteNoOfuscado = "PeliculaJWT";
+export { PeliculaJWT };

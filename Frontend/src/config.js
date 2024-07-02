@@ -9,7 +9,7 @@ const urlResourceCapitulos = urlServidor + "/api/capitulos";
 const urlResourceSeries = urlServidor + "/api/serie";
 const urlResourceSeriesJWT = urlServidor + "/api/SeriesJWT"
 const urlResourcePeliculas = urlServidor + "/api/pelicula"
-const urlResourcePeliculasJWT = urlServidor + "/api/PeliculasJWT"
+const urlResourcePeliculaJWT = urlServidor + "/api/PeliculaJWT"
 const urlResourceActores = urlServidor + "/api/actores"
 ;
 
@@ -23,7 +23,7 @@ export const config = {
     urlResourceSeries,
     urlResourceSeriesJWT,
     urlResourcePeliculas,
-    urlResourcePeliculasJWT,
+    urlResourcePeliculaJWT,
     urlResourceActores
 }
 

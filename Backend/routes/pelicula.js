@@ -164,7 +164,7 @@ router.delete('/api/pelicula/:CodigoPel', async (req, res) => {
 //-- SEGURIDAD ---------------------------
 //------------------------------------
 router.get(
-  '/api/peliculasJWT',
+  '/api/peliculaJWT',
   auth.authenticateJWT,
   async function (req, res, next) {
     /* #swagger.security = [{
